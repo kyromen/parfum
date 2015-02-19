@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="3.2" type="component" method="upgrade">
+	<name>com_advancedmodules</name>
+	<description>COM_ADVANCEDMODULES_DESC</description>
+	<version>4.19.2FREE</version>
+	<creationDate>January 2015</creationDate>
+	<author>NoNumber (Peter van Westen)</author>
+	<authorEmail>peter@nonumber.nl</authorEmail>
+	<authorUrl>http://www.nonumber.nl</authorUrl>
+	<copyright>Copyright © 2015 NoNumber All Rights Reserved</copyright>
+	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+
+	<administration>
+		<menu>com_advancedmodules</menu>
+	</administration>
+
+	<!-- installation/uninstallation -->
+	<scriptfile>script.advancedmodules.php</scriptfile>
+</extension>
