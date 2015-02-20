@@ -1,0 +1,1 @@
+<?phpdefined('_JEXEC') or die('Restricted access');/*** Param Filter: Virtuemart 2 search module* Version: 2.0.6 (2013.08.13)* Author: Usov Dima* Copyright: Copyright (C) 2012-2013 usovdm* License GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html* http://myext.eu**/
