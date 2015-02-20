@@ -39,6 +39,12 @@ if($this->products){
 			$db->setQuery($sql);
 			$db->query();
 			$p_volume = $db->loadAssocList();
+
+			if ( (int)$product->allPrices[0]['product_override_price'] ) {
+				$p_price = (int)$product->allPrices[0]['product_override_price'];
+			} else {
+				$p_price = (int)$product->allPrices[0]['product_price'];
+			}
 			?>
 
 			<div class="addtocart-popup">
@@ -61,7 +67,7 @@ if($this->products){
 							<td style="width: 280px"><?php echo $product->product_name; ?></td>
 							<td style="width: 120px"><?php echo $p_volume[0]['value']; ?></td>
 							<td style="width: 90px"><?php echo $product->quantity; ?></td>
-							<td><?php echo (int)$product->allPrices[0]['product_price'] * $product->quantity  . " RUB"; ?></td>
+							<td><?php echo $p_price * $product->quantity  . " RUB"; ?></td>
 						</tr>
 						<tr>
 							<td colspan="2"><?php echo '<span><a class="continue_link" href="' . $this->continue_link . '" >' . vmText::_('COM_VIRTUEMART_CONTINUE_SHOPPING') . '</a></span>'; ?></td>

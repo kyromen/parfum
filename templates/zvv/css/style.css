@@ -559,3 +559,5 @@ div.addtocart-popup table td .showcart, div.addtocart-popup table td .continue_l
 div.addtocart-popup table td:last-child span { float: right; }
 div.addtocart-popup table #prprice { font-family: "PFDinTextCondProMedium"; font-size: 18px; }
 #fancybox-close { position: absolute; top: 30px; right: 30px; width: 24px; height: 24px; background: url('/images/close_btn_popup.png'); }
+
+.row .PricebasePrice.vm-display.vm-price-value { margin-top: 10px; }
