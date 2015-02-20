@@ -20,6 +20,8 @@
 // Check to ensure this file is included in Joomla!
 defined('_JEXEC') or die('Restricted access');
 
+$db = JFactory::getDBO();
+
 function getVmMediaFile($virtuemart_media_id, $getthumb = false) {
 	$db = JFactory::getDBO();
 	if ($getthumb) $sql = "SELECT file_url_thumb FROM #__virtuemart_medias WHERE virtuemart_media_id = ".intval($virtuemart_media_id);
@@ -31,6 +33,14 @@ function getVmMediaFile($virtuemart_media_id, $getthumb = false) {
 if($this->products){
 	foreach($this->products as $product){
 		if($product->quantity>0){ ?>
+			<?php
+			// prdduct volume
+			$sql= "SELECT value FROM #__virtuemart_product_custom_plg_param_values WHERE id = (SELECT val FROM #__virtuemart_product_custom_plg_param_ref AS t1 WHERE t1.virtuemart_product_id = " . $product->virtuemart_product_id . " and t1.virtuemart_custom_id = " . 26 . " LIMIT 1);";
+			$db->setQuery($sql);
+			$db->query();
+			$p_volume = $db->loadAssocList();
+			?>
+
 			<div class="addtocart-popup">
 				<span>Товар добавлен</span>
 				<table>
@@ -49,9 +59,9 @@ if($this->products){
 								<?php } ?>
 							</td>
 							<td style="width: 280px"><?php echo $product->product_name; ?></td>
-							<td style="width: 120px" id="prvolume"></td>
+							<td style="width: 120px"><?php echo $p_volume[0]['value']; ?></td>
 							<td style="width: 90px"><?php echo $product->quantity; ?></td>
-							<td id="prprice"></td>
+							<td><?php echo (int)$product->allPrices[0]['product_price'] * $product->quantity  . " RUB"; ?></td>
 						</tr>
 						<tr>
 							<td colspan="2"><?php echo '<span><a class="continue_link" href="' . $this->continue_link . '" >' . vmText::_('COM_VIRTUEMART_CONTINUE_SHOPPING') . '</a></span>'; ?></td>
@@ -59,11 +69,6 @@ if($this->products){
 						</tr>
 					</tbody>
 				</table>
-
-				<script>
-					jQuery('#prvolume').text(jQuery('.childs-block tr.active .pr_volume').text());
-					jQuery('#prprice').text(jQuery('.childs-block tr.active span.PricesalesPrice').text());
-				</script>
 			</div>
 		<?php } ?>
 <!--			--><?//

@@ -182,10 +182,5 @@ jQuery.noConflict();
                 }
             });
         })
-
-        $('.productdetails .addtocart-button').click( function() {
-            $('.childs-block tr').removeClass('active');
-            $( this ).parent().parent().parent().parent().parent().parent().toggleClass( 'active' );
-        })
     });
 })(jQuery);
