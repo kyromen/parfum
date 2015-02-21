@@ -301,8 +301,8 @@ div[class*="-view"] .row{margin: 0;padding-top: 6px;}
 
 @media (max-width: 768px){
 	.row div[class*="width"]{
-	  width:100%;
-	  float: none;
+	  /*width:100%;*/
+	  /*float: none;*/
 	  margin-bottom: 15px;
 	}
 	.vm-product-container > div {

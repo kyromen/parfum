@@ -254,7 +254,7 @@ body {
 }
 
 #wrapper { min-height: 100%; height: auto !important; height: 100%; }
-div.wrapper { margin: 0 auto; position: relative; height: 131px; }
+div.wrapper { margin: 0 auto; position: relative; }
 
 #nav > .wrapper { position: inherit; }
 #nav { background: black; height: 48px; }
@@ -292,7 +292,7 @@ div.wrapper { margin: 0 auto; position: relative; height: 131px; }
 
 /*#footer { margin: -100px auto 0; height: 100px; position: relative; }*/
 
-#header { margin: 32px 0 25px; }
+#header { margin: 32px 0 25px; height: 131px; }
 
 .custom_header > div { float: left; }
 .custom_header { }

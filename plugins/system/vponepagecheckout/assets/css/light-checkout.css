@@ -2080,6 +2080,12 @@ button.close {
 	font-family: PFDinTextCondProMedium;
 }
 
+.cart-p-qty .proopc-btn, .cart-p-qty .proopc-btn * {
+	-webkit-appearance: none !important;
+	border: 1px solid #ccc;
+	border-radius: 2px;
+}
+
 #proopc-order-submit {
 	text-transform: uppercase;
 	background: black;
