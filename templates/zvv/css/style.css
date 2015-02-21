@@ -254,7 +254,7 @@ body {
 }
 
 #wrapper { min-height: 100%; height: auto !important; height: 100%; }
-div.wrapper { margin: 0 auto; position: relative; }
+div.wrapper { margin: 0 auto; position: relative; height: 131px; }
 
 #nav > .wrapper { position: inherit; }
 #nav { background: black; height: 48px; }
@@ -307,7 +307,7 @@ div.wrapper { margin: 0 auto; position: relative; }
 .telAddr .callback > p { font-family: PFDinTextCondProMedium; text-transform: uppercase; font-size: 13px; padding: 9px 0; letter-spacing: 1px; }
 .vmCartModule > img { float: left; margin-right: 14px; }
 .vmCartModule > p { font-family: PFDinTextCondProMedium; font-size: 20px; text-transform: uppercase; padding: 6px 0 10px; letter-spacing: 1px; }
-#header .search { position: absolute; right: 0px; margin-top: -50px; }
+#header .search { position: absolute; right: 0px; top: 81px; }
 
 .custom_deals > div { float: left; height: 62px; width: 228px; margin-left: 9px; text-align: center; border: 1px solid #cccccc; }
 .custom_deals > div:first-child { margin: 0; }

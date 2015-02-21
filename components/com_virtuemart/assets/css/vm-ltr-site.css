@@ -355,7 +355,8 @@ div[class*="-view"] .row{margin: 0;padding-top: 6px;}
 .search input[name="keyword"] { font-family: TimesNewRoman; font-style: italic; font-size: 14px; color: #cdcdcd; border: 1px solid; width: 192px; padding: 9px 28px 8px 0; text-indent: 20px; }
 .search input[type="image"] { position: absolute; right: 7px; top: 10px; }
 
-#vmCartModule  { padding-top: 11px; }
+#vmCartModule  { padding-top: 11px; position: absolute; right: 0; width: 222px; }
+.vmCartModule > a { position: absolute; width: 100%; }
 #vmCartModule .total_products { float: left; color: #666666; }
 #vmCartModule .total_products, #vmCartModule .total { font-family: PFDinTextCondProRegular; font-size: 16px; }
 #vmCartModule .total { color: black; }
