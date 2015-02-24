@@ -55,10 +55,8 @@ if($show_filter){
 	<?php
 	*/
 	echo $categories_html;
-    echo "<div class=\"separator_first_type\"></div>";
     echo "<div class=\"clear\"></div>";
     echo $price_html;
-    echo "<div class=\"separator_first_type\"></div>";
 
 	foreach(array_reverse($types) as $type){
 		$tmp_params = $type->custom_params;
@@ -115,12 +113,7 @@ if($show_filter){
 //		Тип товара
         if ($type->virtuemart_custom_id == 25) {
             echo "<div class=\"clear\"></div>";
-            echo "<div class=\"separator_first_type\"></div>";
             echo $manufacturers_html;
-        }
-//		Год создания
-		else if ($type->virtuemart_custom_id == 24) {
-            echo "<div class=\"separator_first_type\"></div>";
         }
     }
     echo "<div class=\"clear\"></div>";
