@@ -282,7 +282,10 @@ if (VmConfig::get ('showCategory', 1) and empty($this->keyword)) {
 	}
 	?>
 </div>
-</div>
+
+<?php if ( !strstr ( JURI::current(), "/manufacturer/" ) ) { ?>
+	</div>
+<?php } ?>
 
 <?php
 }

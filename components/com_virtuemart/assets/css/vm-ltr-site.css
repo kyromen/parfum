@@ -115,8 +115,8 @@ span.addtocart-button input.addtocart-button-disabled{width:auto;background:#f2f
 .orderlistcontainer a :hover{text-decoration:none;display:block;color:#EEE;background:#777;}
 /*.orderlistcontainer div.orderlist{display:none;position:absolute;border:solid #CAC9C9 1px;background:#FFF;cursor:pointer;z-index: 1;}*/
 .orderlistcontainer div { float: left; }
-.orderlistcontainer div.activeOrder > a, .orderlistcontainer div.orderlist > div > a { margin-left: 19px; padding: 7px 16px; display: block; }
-.orderlistcontainer div.activeOrder:hover > a, .orderlistcontainer div.orderlist > div:hover > a { padding: 6px 15px; border: 1px solid black; }
+.orderlistcontainer div.activeOrder > a, .orderlistcontainer div.orderlist > div > a { margin-left: 9px; padding: 7px 15px; display: block; }
+.orderlistcontainer div.activeOrder:hover > a, .orderlistcontainer div.orderlist > div:hover > a { padding: 6px 14px; border: 1px solid black; }
 .orderlistcontainer div.activeOrder a, .orderlistcontainer div.orderlist > div:hover a { color: black; }
 .orderlistcontainer div a { font-size: 14px; color: #666666; font-family: MuseoSansCyrl; }
 .orderlistcontainer div.orderlist { display: block !important; }
@@ -286,7 +286,7 @@ a:hover .vm-img-desc{background: #095197}
 .userfields_info{font-weight: bold;display: block;margin: 0px 0px 8px 0px;}
 
 /*div.product {float:left;border:1px solid #ddd;min-width: 220px;}*/
-div.product {float: left; width: 230px; margin-left: 10px; }
+div.product {float: left; width: 230px; margin-left: 30px; }
 div.product:hover {border: 1px solid #b6b6b6; width: 228px; height: 100%; }
 
 div.product:first-child { margin-left: 0; }

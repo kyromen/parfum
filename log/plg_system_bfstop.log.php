@@ -107,3 +107,4 @@
 2015-02-20T10:11:07+00:00 DEBUG Successful login by alex from IP address 127.0.0.1
 2015-02-20T11:14:37+00:00 DEBUG Successful login by alex from IP address 127.0.0.1
 2015-02-20T11:15:02+00:00 DEBUG Successful login by alex from IP address 127.0.0.1
+2015-02-24T17:07:56+00:00 DEBUG Successful login by alex from IP address 127.0.0.1
