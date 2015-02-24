@@ -356,7 +356,6 @@ div[class*="-view"] .row{margin: 0;padding-top: 6px;}
 .search input[type="image"] { position: absolute; right: 7px; top: 10px; }
 
 #vmCartModule  { padding-top: 11px; position: absolute; right: 0; width: 222px; }
-.vmCartModule > a { position: absolute; width: 100%; }
 #vmCartModule .total_products { float: left; color: #666666; }
 #vmCartModule .total_products, #vmCartModule .total { font-family: PFDinTextCondProRegular; font-size: 16px; }
 #vmCartModule .total { color: black; }
