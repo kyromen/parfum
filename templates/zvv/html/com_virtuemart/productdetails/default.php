@@ -190,21 +190,8 @@ if ($count_images > 1) {
 		    }
 		}
 
-		if ( !empty($child_products) ) {
-			$min_price = 1000000000;
-			$product = $this->product;
-			foreach ($child_products as $child) {
-				if ( $min_price > $child->allPrices[0]['salesPrice'] ) {
-					$min_price = $child->allPrices[0]['salesPrice'];
-					$product = $child;
-				}
-			}
-			echo "<span class=\"price_title\">Цена от</span>";
-			echo shopFunctionsF::renderVmSubLayout('prices', array('product'=>$product,'currency'=>$this->currency));
-		} else {
-			echo "<span class=\"price_title\">Цена</span>";
-			echo shopFunctionsF::renderVmSubLayout('prices', array('product'=>$this->product,'currency'=>$this->currency));
-		}
+		echo "<span class=\"price_title\">Цена</span>";
+		echo shopFunctionsF::renderVmSubLayout('prices', array('product'=>$this->product,'currency'=>$this->currency));
 
 		// Manufacturer of the Product
 		if (VmConfig::get('show_manufacturers', 1) && !empty($this->product->virtuemart_manufacturer_id)) {
@@ -263,7 +250,7 @@ if ($count_images > 1) {
 				?>
 
 				<tr>
-					<td style="width: 100px;">
+					<td style="width: 110px;">
 						<span class="pr_img">
 							<?php if ( !(empty($product->virtuemart_media_id[0])) ) { ?>
 								<img src="/<?php echo getVmMediaFile($product->virtuemart_media_id[0]); ?>" />

@@ -68,9 +68,9 @@ if($this->products){
 							<td>Цена</td>
 						</tr>
 						<tr>
-							<td style="width: 100px">
+							<td style="width: 130px;">
 								<?php if (!empty($product->virtuemart_media_id)) { ?>
-									<img style="max-width: 150px; max-height: 100px;" src="/<?php echo getVmMediaFile($product->virtuemart_media_id[0]); ?>" />
+									<img style="max-width: 120px; max-height: 100px;" src="/<?php echo getVmMediaFile($product->virtuemart_media_id[0]); ?>" />
 								<?php } ?>
 							</td>
 							<td style="width: 280px"><?php echo $product->product_name; ?></td>

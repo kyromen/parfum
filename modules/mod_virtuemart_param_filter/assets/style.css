@@ -23,7 +23,7 @@ div.custom_params, div.filter_manufacturers, .price, .filter_category {
 div.filter_category {
 	border: none;
 }
-#mcf_vmlastvisitedcategoryid + div { display: none; }
+/*#mcf_vmlastvisitedcategoryid + div { display: none; }*/
 input.slider-range-gt { float:left; }
 input.slider-range-lt { float:right; }
 div.slider-range-gt { text-align:left; }
@@ -170,5 +170,5 @@ form.mcf_form {
 .custom_params ul.values li input + span, .filter_manufacturers ul.values li input +  span {
 	display: block;
 	float: left;
-	width: 70%;
+	width: 65%;
 }
