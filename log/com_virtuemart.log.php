@@ -651,3 +651,5 @@
 2015-03-04 07:58:08 ERROR vmError: Max execution time reached in model product getProduct() 25
 2015-03-04 07:58:08 ERROR vmError: Max execution time reached in model product getProduct() 25
 2015-03-04 07:58:08 ERROR vmError: Max execution time reached in model product getProduct() 25
+2015-03-04 20:02:31 ERROR vmError: Couldnt create thumb, file not found /srv/1001parfum.ru/images/stories/virtuemart/manufacturer/kativa.jpg
+2015-03-04 20:02:31 ERROR vmError: Couldnt create thumb, file not found /srv/1001parfum.ru/images/stories/virtuemart/manufacturer/marlies-moller.jpg
