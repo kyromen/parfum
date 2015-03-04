@@ -30,15 +30,24 @@ function getVmMediaFile($virtuemart_media_id, $getthumb = false) {
 	return $db->loadResult();
 }
 
+function getCustomField($db, $pr_id, $custom_id) {
+	$sql= "SELECT value FROM #__virtuemart_product_custom_plg_param_values WHERE id = (SELECT val FROM #__virtuemart_product_custom_plg_param_ref AS t1 WHERE t1.virtuemart_product_id = " . $pr_id . " and t1.virtuemart_custom_id = " . $custom_id . " LIMIT 1);";
+	$db->setQuery($sql);
+	$db->query();
+	$out = $db->loadAssocList();
+	if ( !empty($out[0]['value']) ) {
+		return $out[0]['value'];
+	} else {
+		return "";
+	}
+}
+
 if($this->products){
 	foreach($this->products as $product){
 		if($product->quantity>0){ ?>
 			<?php
 			// prdduct volume
-			$sql= "SELECT value FROM #__virtuemart_product_custom_plg_param_values WHERE id = (SELECT val FROM #__virtuemart_product_custom_plg_param_ref AS t1 WHERE t1.virtuemart_product_id = " . $product->virtuemart_product_id . " and t1.virtuemart_custom_id = " . 26 . " LIMIT 1);";
-			$db->setQuery($sql);
-			$db->query();
-			$p_volume = $db->loadAssocList();
+			$p_volume = getCustomField($db, $product->virtuemart_product_id, 23);
 
 			if ( (int)$product->allPrices[0]['product_override_price'] ) {
 				$p_price = (int)$product->allPrices[0]['product_override_price'];
@@ -59,13 +68,13 @@ if($this->products){
 							<td>Цена</td>
 						</tr>
 						<tr>
-							<td style="width: 140px">
+							<td style="width: 100px">
 								<?php if (!empty($product->virtuemart_media_id)) { ?>
-									<img style="width: 100px" src="/<?php echo getVmMediaFile($product->virtuemart_media_id[0]); ?>" />
+									<img style="max-width: 150px; max-height: 100px;" src="/<?php echo getVmMediaFile($product->virtuemart_media_id[0]); ?>" />
 								<?php } ?>
 							</td>
 							<td style="width: 280px"><?php echo $product->product_name; ?></td>
-							<td style="width: 120px"><?php echo $p_volume[0]['value']; ?></td>
+							<td style="width: 120px"><?php echo $p_volume; ?></td>
 							<td style="width: 90px"><?php echo $product->quantity; ?></td>
 							<td><?php echo $p_price * $product->quantity  . " RUB"; ?></td>
 						</tr>

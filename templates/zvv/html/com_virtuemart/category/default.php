@@ -47,6 +47,7 @@ $document = JFactory::getDocument ();
 $document->addScriptDeclaration ($js);
 
 $manuM = VmModel::getModel('manufacturer');
+$mlang=(!VmConfig::get('prodOnlyWLang',false) and VmConfig::$defaultLang!=VmConfig::$vmlang and Vmconfig::$langCount>1);
 
 //$categgories = $manuMC->getManufacturerCategories(true);
 
@@ -58,96 +59,53 @@ if (empty($this->keyword) and !empty($this->category)) {
 <?php
 }
 
-/* Show child categories */
-
-if (VmConfig::get ('showCategory', 1) and empty($this->keyword)) {
-	$manuM = VmModel::getModel('manufacturer');
-	$mlang=(!VmConfig::get('prodOnlyWLang',false) and VmConfig::$defaultLang!=VmConfig::$vmlang and Vmconfig::$langCount>1);
-	$manufacturers = $manuM ->getManufacturersOfProductsInCategory($this->category->virtuemart_category_id,VmConfig::$vmlang,$mlang);
-
-    if ( strstr ( JURI::current(), "/manufacturer/" ) ) {
-        $model = VmModel::getModel('manufacturer');
-        $manufacturer = $model->getManufacturer();
-        ?>
-        <?php if ($manufacturer->mf_name) { ?>
-            <div class="manufacturer-block">
-                <?php if (isset($manufacturer->virtuemart_media_id[0])) {
-                    foreach ($manufacturer->virtuemart_media_id as $virtuemart_media_id) { ?>
-                        <div><img src="<?php echo getVmMediaFile($virtuemart_media_id);?>" \></div>
-                    <?php } ?>
-                <?php } ?>
-                <div>Парфюмерия <?php echo $manufacturer->mf_name;?></div>
-            </div>
-        <?php } else { ?>
-            <div style="padding: 10px;"></div>
-        <?php } ?>
-        <?php
-    } else {
-
-        echo "<div class=\"category-manufacturers\">";
-
-        $indexes = array();
-        $brands = array();
-        $block = $manufacturers[0]->mf_name[0];
-
-        if ( isset($_GET['index']) ) {
-            $index = $block = $_GET['index'];
-        }
-
-        $i = 0;
-        $j = 0;
-        foreach ( $manufacturers as $manuf ) {
-            if ( isset($index) ) {
-                if ($index != $manuf->mf_name[0]) continue;
-            }
-            if ($block != $manuf->mf_name[0]) {
-                $indexes[$i] = $brands;
-                $brands = array();
-                $block = $manuf->mf_name[0];
-                $i += 1;
-                $j = 0;
-                $brands[$j] = $manuf;
-            } else {
-                $brands[$j] = $manuf;
-                $j += 1;
-            }
-        }
-        $indexes[$i] = $brands;
-		?>
-
-		<div class="brands-block">
-
-			<p>Выберите бренд из списка</p>
-
-			<div class='brand-index'>
-				<?php foreach ($indexes as $index) {
-					echo "<div>" . $index[0]->mf_name[0] . "</div>";
-				} ?>
-<!--				--><?php //$link = JRoute::_('index.php?option=com_virtuemart&view=category&virtuemart_category_id=' . $this->category->virtuemart_category_id, FALSE); ?>
-<!--				<div><a href="--><?php //echo $link; ?><!--">ВСЕ</a></div>-->
-			</div>
-
-			<div class="clear"></div>
-
-			<div class="brands">
-				<?php foreach ($indexes as $index) { ?>
-					<div class="select" style="display: none;">
-						<a href="javascript:void(0);" class="slct">Выберите производителя:</a>
-						<ul class="drop">
-							<?php foreach ($index as $brand) {
-								$link = JRoute::_('index.php?option=com_virtuemart&view=category&virtuemart_manufacturer_id=' . $brand->virtuemart_manufacturer_id . "&virtuemart_category_id=" . $this->category->virtuemart_category_id, FALSE);
-							?>
-								<li><a href="<?php echo $link; ?>"><?php echo $brand->mf_name; ?></a></li>
-							<?php } ?>
-						</ul>
-						<input type="hidden" id="select" />
-					</div>
+if ( strstr ( JURI::current(), "/manufacturer/" ) ) {
+	$model = VmModel::getModel('manufacturer');
+	$manufacturer = $model->getManufacturer();
+	?>
+	<?php if ($manufacturer->mf_name) { ?>
+		<div class="manufacturer-block">
+			<div class="manuf-header">Парфюмерия <?php echo $manufacturer->mf_name;?></div>
+			<?php if (isset($manufacturer->virtuemart_media_id[0])) {
+				foreach ($manufacturer->virtuemart_media_id as $virtuemart_media_id) { ?>
+					<div class="manuf-img"><img src="<?php echo getVmMediaFile($virtuemart_media_id);?>" \></div>
 				<?php } ?>
-			</div>
-			<div class="clear"></div>
+			<?php } ?>
+
+			<?php if ( !empty($manufacturer->mf_desc) ) { ?>
+				<div class="manuf-desc">
+					<p><?php echo str_replace( "\n", '</p><p>', $manufacturer->mf_desc ); ?></p>
+				</div>
+			<?php } ?>
 		</div>
+	<?php } else { ?>
+		<div style="padding: 10px;"></div>
+	<?php } ?>
 	<?php
+	$manufacturers = $manuM ->getManufacturersOfProductsInCategory($this->category->virtuemart_category_id,VmConfig::$vmlang,$mlang);
+	$indexes = array();
+	$brands = array();
+	$block = $manufacturers[0]->mf_name[0];
+
+	$i = 0;
+	$j = 0;
+	foreach ( $manufacturers as $manuf ) {
+        if ( isset($index) ) {
+            if ($index != $manuf->mf_name[0]) continue;
+        }
+        if ($block != $manuf->mf_name[0]) {
+            $indexes[$i] = $brands;
+            $brands = array();
+            $block = $manuf->mf_name[0];
+            $i += 1;
+            $j = 0;
+            $brands[$j] = $manuf;
+        } else {
+            $brands[$j] = $manuf;
+            $j += 1;
+        }
 	}
+	$indexes[$i] = $brands;
 
 	if (empty($this->category->haschildren)) {
 		$model = VmModel::getModel('category');
@@ -159,14 +117,14 @@ if (VmConfig::get ('showCategory', 1) and empty($this->keyword)) {
 		$categories = $this->category->children;
 	}
 
-	if (!empty($categories)) {
+		if (!empty($categories)) {
 
 		// Category and Columns Counter
 		$iCol = 1;
 		$iCategory = 1;
 
 		// Calculating Categories Per Row
-//		$categories_per_row = VmConfig::get ('categories_per_row', 3);
+		//		$categories_per_row = VmConfig::get ('categories_per_row', 3);
 		$categories_per_row = count($categories);
 		$category_cellwidth = ' width' . floor (100 / $categories_per_row);
 
@@ -181,7 +139,6 @@ if (VmConfig::get ('showCategory', 1) and empty($this->keyword)) {
 		$category_with_products = array();
 		foreach ($categories as $category) {
 			$manufacturers = $manuM->getManufacturersOfProductsInCategory($category->virtuemart_category_id, VmConfig::$vmlang, $mlang);
-
 
 			$whithout_products = true;
 			foreach ($manufacturers as $manuf) {
@@ -206,22 +163,14 @@ if (VmConfig::get ('showCategory', 1) and empty($this->keyword)) {
 
 			$category_with_products[$i] = $category;
 			$i++;
-		}
+		} ?>
 
-		foreach ($category_with_products as $category) {
-			// Show the horizontal seperator
-			if ($iCol == 1 && $iCategory > $categories_per_row) {
-				?>
-				<!--					<div class="horizontal-separator"></div>-->
-			<?php
-			}
+		<div class="row">
+		<?php foreach ($category_with_products as $category) { ?>
 
-			// this is an indicator wether a row needs to be opened or not
-			if ($iCol == 1) {
-				?>
-				<div class="row">
+
+
 			<?php
-			}
 
 			// Category Link
 			if (isset($_GET['index'])) {
@@ -259,38 +208,15 @@ if (VmConfig::get ('showCategory', 1) and empty($this->keyword)) {
 					</h2>
 				</div>
 			</div>
-			<?php
-			$iCategory++;
-
-			// Do we need to close the current row now?
-			if ($iCol == $categories_per_row) {
-				?>
-				<div class="clear"></div>
-				</div>
-				<?php
-				$iCol = 1;
-			} else {
-				$iCol++;
-			}
-		}
-		// Do we need a final closing row tag?
-		if ($iCol != 1) {
-			?>
+		<?php } ?>
 			<div class="clear"></div>
-			</div>
-		<?php }
-	}
-	?>
-</div>
-
-<?php if ( !strstr ( JURI::current(), "/manufacturer/" ) ) { ?>
+		</div>
+		<div class="clear"></div>
 	</div>
+	<?php } ?>
 <?php } ?>
 
-<?php
-}
-?>
-<div class="browse-view">
+<div id="products-block" class="browse-view">
 	<?php
 
 	if (!empty($this->keyword)) {
@@ -320,11 +246,11 @@ if (VmConfig::get ('showCategory', 1) and empty($this->keyword)) {
 <!--		<!-- End Search Box -->
 <!--	--><?php //} ?>
 
-	<div class="orderby-displaynumber">
-		<div class="floatleft">
-			<?php echo $this->orderByList['orderby']; ?>
+<!--	<div class="orderby-displaynumber">-->
+<!--		<div class="floatleft">-->
+<!--			--><?php //echo $this->orderByList['orderby']; ?>
 <!--			--><?php //echo $this->orderByList['manufacturer']; ?>
-		</div>
+<!--		</div>-->
 		<!--    <div class="vm-pagination floatright">-->
 		<!--        --><?php
 		//            echo $this->vmPagination->getPagesLinks ();
@@ -334,8 +260,8 @@ if (VmConfig::get ('showCategory', 1) and empty($this->keyword)) {
 
 		<!--    <div class="width30 floatright display-number">--><?php //echo $this->vmPagination->getResultsCounter ();?><!--<br/>--><?php //echo $this->vmPagination->getLimitBox ($this->category->limit_list_step); ?><!--</div>-->
 
-		<div class="clear"></div>
-	</div> <!-- end of orderby-displaynumber -->
+<!--		<div class="clear"></div>-->
+<!--	</div> <!-- end of orderby-displaynumber -->
 
 	<?php
 	if (!empty($this->products)) {

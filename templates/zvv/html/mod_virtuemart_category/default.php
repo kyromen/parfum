@@ -32,36 +32,10 @@ jQuery(document).ready(function() {
 		//if ($active_category_id == $category->virtuemart_category_id) $active_menu = 'class="active"';
 		if (in_array( $category->virtuemart_category_id, $parentCategories)) $active_menu = 'class="VmOpen"';
 
-
-		$manuM = VmModel::getModel('manufacturer');
-		$mlang=(!VmConfig::get('prodOnlyWLang',false) and VmConfig::$defaultLang!=VmConfig::$vmlang and Vmconfig::$langCount>1);
-		$manufacturers = $manuM ->getManufacturersOfProductsInCategory($category->virtuemart_category_id,VmConfig::$vmlang,$mlang);
-
-		$indexes = array($manufacturers[0]->mf_name[0]);
-		$block = $manufacturers[0]->mf_name[0];
-
-		$i = 1;
-		foreach ( $manufacturers as $manufacturer ) {
-			if ($block != $manufacturer->mf_name[0]) {
-				$indexes[$i] = $block = $manufacturer->mf_name[0];
-				$i += 1;
-			}
-		}
 		?>
-
-
 
 		<li <?php echo $active_menu ?>>
 			<?php echo JHTML::link($caturl, $cattext); ?>
-			<div class="indexes">
-				<div class="wrapper">
-					<div>Бренд: </div>
-					<? foreach($indexes as $i)
-						echo "<div><a href=\"". $caturl . "?index=" . $i . "\">" . $i ."</a></div>";
-					?>
-					<div><a href="<?php echo $caturl ?>">#</a></div>
-				</div>
-			</div>
 		</li>
 <?php
 	} ?>

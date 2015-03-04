@@ -108,3 +108,22 @@
 2015-02-20T11:14:37+00:00 DEBUG Successful login by alex from IP address 127.0.0.1
 2015-02-20T11:15:02+00:00 DEBUG Successful login by alex from IP address 127.0.0.1
 2015-02-24T17:07:56+00:00 DEBUG Successful login by alex from IP address 127.0.0.1
+2015-02-24T19:26:43+00:00 DEBUG Successful login by alex from IP address 127.0.0.1
+2015-02-28T14:40:09+00:00 DEBUG Successful login by alex from IP address 127.0.0.1
+2015-02-28T15:50:52+00:00 DEBUG Successful login by alex from IP address 127.0.0.1
+2015-02-28T16:17:08+00:00 DEBUG Successful login by alex from IP address 127.0.0.1
+2015-02-28T19:15:48+00:00 DEBUG Successful login by alex from IP address 127.0.0.1
+2015-03-03T07:33:20+00:00 DEBUG Successful login by alex from IP address 127.0.0.1
+2015-03-03T09:45:40+00:00 DEBUG Failed login attempt from IP address 127.0.0.1
+2015-03-03T09:45:40+00:00 DEBUG Failed logins: 1; allowed: 3
+2015-03-03T09:45:41+00:00 INFO Sent email to zvv1992@gmail.com, subject: 1001parfum: Неудачные попытки http://1001parfum/; not successful: "\u041d\u0435 \u0443\u0434\u0430\u043b\u043e\u0441\u044c \u0432\u044b\u0437\u0432\u0430\u0442\u044c \u0444\u0443\u043d\u043a\u0446\u0438\u044e mail."
+2015-03-03T09:45:51+00:00 DEBUG Successful login by alex from IP address 127.0.0.1
+2015-03-03T11:42:01+00:00 DEBUG Successful login by alex from IP address 127.0.0.1
+2015-03-03T12:06:01+00:00 DEBUG Successful login by alex from IP address 127.0.0.1
+2015-03-03T12:29:32+00:00 DEBUG Successful login by alex from IP address 127.0.0.1
+2015-03-03T18:48:25+00:00 DEBUG Successful login by alex from IP address 127.0.0.1
+2015-03-03T19:28:31+00:00 DEBUG Successful login by alex from IP address 127.0.0.1
+2015-03-03T20:10:37+00:00 DEBUG Successful login by alex from IP address 127.0.0.1
+2015-03-04T06:33:30+00:00 DEBUG Successful login by alex from IP address 127.0.0.1
+2015-03-04T08:52:30+00:00 DEBUG Successful login by alex from IP address 127.0.0.1
+2015-03-04T10:11:40+00:00 DEBUG Successful login by alex from IP address 127.0.0.1

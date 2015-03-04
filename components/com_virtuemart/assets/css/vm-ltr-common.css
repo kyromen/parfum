@@ -60,6 +60,7 @@ button, .button {padding: 4px 6px;border: 1px solid #666;background-color: #f5ff
 /* Align rows in products sublayout */
 /*.vm-col {margin: 0.1em 0.1em;width: 60%;}*/
 .vm-col-1 {width: 100%;} .vm-col-2 {width: 48%;} .vm-col-3 {width: 31.914893614%;} .vm-col-4 {width: 23.8%;} .vm-col-5 {width: 19%;} .vm-col-6 {width: 16%;} .vm-col-8 {width: 12%;} .vm-col-9 {width: 11%;} .vm-col-10 {width: 9%;} .vm-col-11 {width: 8%;} .vm-col-12 {width: 7%;}
+.vm-col-3:hover {width: 31.7%;}
 /* Products sublayout end */
 
 

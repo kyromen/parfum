@@ -223,14 +223,7 @@ if($this->params->get('responsive', 1))
 							<a title="<?php echo $prow->mf_name; ?>" href="<?php echo $manufacturerIncludedProductsURL; ?>"><?php echo $prow->mf_name; ?></a>
 						</div>
 						<?php
-
-						if ($prow->product_parent_id != 0) {
-							$p_product = $product_model->getProduct($prow->product_parent_id);
-							echo JHtml::link($p_product->link, $prow->product_name);
-						} else {
-							echo JHtml::link($prow->url, $prow->product_name);
-						}
-
+						echo JHtml::link($prow->url, $prow->product_name);
 						echo $this->customfieldsModel->CustomsFieldCartDisplay($prow);
 						?>
 

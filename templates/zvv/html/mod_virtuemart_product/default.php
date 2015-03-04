@@ -100,11 +100,13 @@ if($params->get ('moduleclass_sfx') == '_color') {
 								$product->virtuemart_category_id);
 						}
 
-						$manufacturerIncludedProductsURL = JRoute::_('index.php?option=com_virtuemart&view=category&virtuemart_manufacturer_id=' . $product->virtuemart_manufacturer_id[0], FALSE);
-						?>
-						<div class="manufacture">
-							<a title="<?php echo $product->mf_name; ?>" href="<?php echo $manufacturerIncludedProductsURL; ?>"><?php echo $product->mf_name; ?></a>
-						</div>
+						if ( !(empty($product->virtuemart_manufacturer_id[0])) ) {
+							$manufacturerIncludedProductsURL = JRoute::_('index.php?option=com_virtuemart&view=category&virtuemart_manufacturer_id=' . $product->virtuemart_manufacturer_id[0], FALSE);
+							?>
+							<div class="manufacture">
+								<a title="<?php echo $product->mf_name; ?>" href="<?php echo $manufacturerIncludedProductsURL; ?>"><?php echo $product->mf_name; ?></a>
+							</div>
+						<?php } ?>
 						<h2 class="pr_name">
 							<a href="<?php echo $url ?>"><?php echo $product->product_name ?></a>
 						</h2>

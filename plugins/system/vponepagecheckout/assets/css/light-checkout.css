@@ -583,7 +583,7 @@ class*=" proopc-icon-"] {
 	-moz-border-radius:5px;
 	padding:0;
 	color:#fff;
-	font-size:12px Verdana;
+	font-size:12px;
 	max-width:250px;
 	z-index:10001
 }
@@ -598,7 +598,7 @@ class*=" proopc-icon-"] {
 .proopc-tooltip .tooltip-title {
 	padding:5px 10px;
 	background:#FAFAFA;
-	border:1px solid FAFAFA;
+	border:1px solid #FAFAFA;
 	color:#333;
 	font-weight:700;
 	border-top-left-radius:5px;
@@ -757,7 +757,7 @@ class*=" proopc-icon-"] {
 }
 
 .proopc-register-login {
-	width:100%^;
+	width:100%;
 	display:block;
 	margin:0;
 	padding:0
@@ -1400,7 +1400,7 @@ table.cart-summary.proopc-table-striped tr th {
 
 .col-name div {
 	vertical-align:top;
-	padding-right: 60px;
+	padding-right: 30px;
 }
 
 .cart-product-description > a {
@@ -2398,7 +2398,7 @@ label[for="BTasST"].st-same-checkbox {
 	-moz-border-radius:5px;
 	padding:0;
 	color:#fff;
-	font-size:12px Verdana;
+	font-size:12px;
 	max-width:250px;
 	z-index:10001
 }

@@ -57,6 +57,7 @@ if($show_filter){
 	echo $categories_html;
     echo "<div class=\"clear\"></div>";
     echo $price_html;
+	echo $manufacturers_html;
 
 	foreach(array_reverse($types) as $type){
 		$tmp_params = $type->custom_params;
@@ -110,11 +111,6 @@ if($show_filter){
 		}
 		$count_zero_show = $count_zero_show_tmp;
 		$count_zero_show_txt = $count_zero_show_txt_tmp;
-//		Тип товара
-        if ($type->virtuemart_custom_id == 25) {
-            echo "<div class=\"clear\"></div>";
-            echo $manufacturers_html;
-        }
     }
     echo "<div class=\"clear\"></div>";
     echo "<div class=\"separator_second_type\"></div>";

@@ -17,7 +17,20 @@ $showRating = $viewData['showRating'];
 $verticalseparator = " vertical-separator";
 
 $product_model = VmModel::getModel('product');
+
 $db = JFactory::getDBO();
+
+function getCustomField($db, $pr_id, $custom_id) {
+	$sql= "SELECT value FROM #__virtuemart_product_custom_plg_param_values WHERE id = (SELECT val FROM #__virtuemart_product_custom_plg_param_ref AS t1 WHERE t1.virtuemart_product_id = " . $pr_id . " and t1.virtuemart_custom_id = " . $custom_id . " LIMIT 1);";
+	$db->setQuery($sql);
+	$db->query();
+	$out = $db->loadAssocList();
+	if ( !empty($out[0]['value']) ) {
+		return $out[0]['value'];
+	} else {
+		return "";
+	}
+}
 
 echo shopFunctionsF::renderVmSubLayout('askrecomjs');
 
@@ -97,10 +110,12 @@ foreach ($viewData['products'] as $type => $products ) {
 
 
 				<div class="quantity-box-container-<?php echo $rowsHeight[$row]['product_s_desc'] ?>">
-					<?php $manufacturerIncludedProductsURL = JRoute::_('index.php?option=com_virtuemart&view=category&virtuemart_manufacturer_id=' . $product->virtuemart_manufacturer_id[0], FALSE); ?>
-					<div class="manufacture">
-						<a title="<?php echo $product->mf_name; ?>" href="<?php echo $manufacturerIncludedProductsURL; ?>"><?php echo $product->mf_name; ?></a>
-					</div>
+					<?php if ( !(empty($product->virtuemart_manufacturer_id[0])) ) { ?>
+						<?php $manufacturerIncludedProductsURL = JRoute::_('index.php?option=com_virtuemart&view=category&virtuemart_manufacturer_id=' . $product->virtuemart_manufacturer_id[0], FALSE); ?>
+						<div class="manufacture">
+							<a title="<?php echo $product->mf_name; ?>" href="<?php echo $manufacturerIncludedProductsURL; ?>"><?php echo $product->mf_name; ?></a>
+						</div>
+					<?php } ?>
 
 					<?php if ($product->product_parent_id != 0) {
 						$p_product = $product_model->getProduct($product->product_parent_id);
@@ -122,25 +137,59 @@ foreach ($viewData['products'] as $type => $products ) {
 			<?php  } ?>
 				</div>
 			<?php //echo $rowsHeight[$row]['price'] ?>
-			<div class="vm3pr-<?php echo $rowsHeight[$row]['price'] ?>"> <?php
-				echo shopFunctionsF::renderVmSubLayout('prices',array('product'=>$product,'currency'=>$currency)); ?>
-			</div>
-			<?php //echo $rowsHeight[$row]['customs'] ?>
-			<div class="vm3pr-<?php echo $rowsHeight[$row]['customfields'] ?>"> <?php
-				echo shopFunctionsF::renderVmSubLayout('addtocart',array('product'=>$product,'rowHeights'=>$rowsHeight[$row])); ?>
-			</div>
 
-			<?php if ($product->product_parent_id != 0) {
-				// prdduct volume
-				$sql= "SELECT value FROM #__virtuemart_product_custom_plg_param_values WHERE id = (SELECT val FROM #__virtuemart_product_custom_plg_param_ref AS t1 WHERE t1.virtuemart_product_id = " . $product->virtuemart_product_id . " and t1.virtuemart_custom_id = " . 26 . " LIMIT 1);";
-				$db->setQuery($sql);
-				$db->query();
-				$p_volume = $db->loadAssocList();
+			<?php
+			$ids = array();
+			if ($product->product_parent_id != 0) {
+				$ids[] = $product->product_parent_id;;
+				$ids = array_merge($ids, $product_model->getProductChildIds($product->product_parent_id));
+			}
+			else {
+				$ids[] = $product->virtuemart_product_id;
+				$ids = array_merge($ids, $product_model->getProductChildIds($product->virtuemart_product_id));
+			}
+			if ( !empty($ids) ) $child_products = $product_model->getProducts($ids);
+			?>
+
+			<?php for ($i = 0; $i < count($child_products); $i++) { ?>
+				<div class="vm3pr-<?php echo $rowsHeight[$row]['price'] ?>" <?php if ($i != 0) echo 'style="display: none;"'?>> <?php
+					echo shopFunctionsF::renderVmSubLayout('prices',array('product'=>$child_products[$i],'currency'=>$currency)); ?>
+				</div>
+			<?php } ?>
+
+			<?php
+			$p_volume = getCustomField($db,$child_products[0]->virtuemart_product_id, 23)
+			?>
+
+			<?php if ( count($child_products) > 1 ) {
+				$op_value = 0;
 				?>
 
-				<?php if ( isset($p_volume[0]['value']) ) {  ?>
-					<span class="pr_volume"><?php echo JHtml::link ($p_product->link.$ItemidStr, 'Объём: ' . $p_volume[0]['value']); ?></span>
+				<?php if ( !empty($p_volume) ) { ?>
+					<select class="custom-volume">
+						<?php foreach ($child_products as $pr) { ?>
+							<?php
+							$p_volume = getCustomField($db,$pr->virtuemart_product_id, 23)
+							?>
+							<?php if ( !empty($p_volume) ) { ?>
+								<option value="<?php $op_value++; echo $op_value; ?>"><?php echo $p_volume; ?></option>
+							<?php } ?>
+						<?php } ?>
+					</select>
 				<?php } ?>
+			<?php } else if ( !empty($p_volume) ) { ?>
+				<span class="pr_volume"><?php echo JHtml::link ($child_products[0]->link.$ItemidStr, 'Объём: ' . $p_volume); ?></span>
+			<?php } ?>
+
+<!--			--><?php ////echo $rowsHeight[$row]['customs'] ?>
+<!--			<div class="vm3pr---><?php //echo $rowsHeight[$row]['customfields'] ?><!--"> --><?php
+//				echo shopFunctionsF::renderVmSubLayout('addtocart',array('product'=>$product,'rowHeights'=>$rowsHeight[$row])); ?>
+<!--			</div>-->
+
+			<?php for ($i = 0; $i < count($child_products); $i++) { ?>
+				<div class="vm3pr-<?php echo $rowsHeight[$row]['customfields'] ?>" <?php if ($i != 0) echo 'style="display: none;"'?>> <?php
+					echo shopFunctionsF::renderVmSubLayout('addtocart',array('product'=>$child_products[$i],'rowHeights'=>$rowsHeight[$row])); ?>
+				</div>
 			<?php } ?>
 
 <!--			<div class="vm-details-button">-->

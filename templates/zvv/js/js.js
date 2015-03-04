@@ -182,5 +182,16 @@ jQuery.noConflict();
                 }
             });
         })
+
+
+        $( "select.custom-volume" ).change( function() {
+            var ind = this.selectedIndex;
+
+            $( this ).parent().find( '.vm3pr-2' ).css( { "display": "none" } );
+            $( this ).parent().find( '.vm3pr-2' ).eq( ind ).css( { "display": "block" } );
+
+            $( this ).parent().find( '.vm3pr-0' ).css( { "display": "none" } );
+            $( this ).parent().find( '.vm3pr-0' ).eq( ind ).css( { "display": "block" } );
+        });
     });
 })(jQuery);
