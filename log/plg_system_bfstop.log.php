@@ -127,3 +127,9 @@
 2015-03-04T06:33:30+00:00 DEBUG Successful login by alex from IP address 127.0.0.1
 2015-03-04T08:52:30+00:00 DEBUG Successful login by alex from IP address 127.0.0.1
 2015-03-04T10:11:40+00:00 DEBUG Successful login by alex from IP address 127.0.0.1
+2015-03-04T11:21:10+00:00 DEBUG Successful login by Alex from IP address 192.168.100.2
+2015-03-04T11:27:58+00:00 DEBUG Successful login by alex from IP address 127.0.0.1
+2015-03-04T11:28:12+00:00 DEBUG Successful login by alex from IP address 127.0.0.1
+2015-03-04T12:03:04+00:00 DEBUG Successful login by alex from IP address 127.0.0.1
+2015-03-04T12:50:07+00:00 DEBUG Successful login by alex from IP address 127.0.0.1
+2015-03-04T19:05:05+00:00 DEBUG Successful login by alex from IP address 127.0.0.1

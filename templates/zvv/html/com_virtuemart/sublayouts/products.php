@@ -151,15 +151,22 @@ foreach ($viewData['products'] as $type => $products ) {
 			if ( !empty($ids) ) $child_products = $product_model->getProducts($ids);
 			?>
 
+			<?php
+			$p_volume = getCustomField($db,$child_products[0]->virtuemart_product_id, 23);
+			$p_type = getCustomField($db,$child_products[0]->virtuemart_product_id, 2);
+			?>
+
+			<?php if ( !empty($p_type) ) { ?>
+				<span class="pr_type"><?php echo JHtml::link ($child_products[0]->link.$ItemidStr, ucfirst($p_type)); ?></span>
+			<?php } ?>
+
 			<?php for ($i = 0; $i < count($child_products); $i++) { ?>
 				<div class="vm3pr-<?php echo $rowsHeight[$row]['price'] ?>" <?php if ($i != 0) echo 'style="display: none;"'?>> <?php
 					echo shopFunctionsF::renderVmSubLayout('prices',array('product'=>$child_products[$i],'currency'=>$currency)); ?>
 				</div>
 			<?php } ?>
 
-			<?php
-			$p_volume = getCustomField($db,$child_products[0]->virtuemart_product_id, 23)
-			?>
+
 
 			<?php if ( count($child_products) > 1 ) {
 				$op_value = 0;
