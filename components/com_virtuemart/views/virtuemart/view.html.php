@@ -95,7 +95,7 @@ class VirtueMartViewVirtueMart extends VmView {
 			$featured_products_count = $products_per_row * $featured_products_rows;
 
 			if (!empty($featured_products_count) and VmConfig::get('show_featured', 1)) {
-				$this->products['featured'] = $productModel->getProductListing('featured', $featured_products_count);
+				$this->products['featured'] = $productModel->getProductListing('featured', $featured_products_count, TRUE, TRUE, FALSE, TRUE, 0, TRUE);
 				$productModel->addImages($this->products['featured'],1);
 			}
 			
@@ -103,7 +103,7 @@ class VirtueMartViewVirtueMart extends VmView {
 			$latest_products_count = $products_per_row * $latest_products_rows;
 
 			if (!empty($latest_products_count) and VmConfig::get('show_latest', 1)) {
-				$this->products['latest']= $productModel->getProductListing('latest', $latest_products_count);
+				$this->products['latest']= $productModel->getProductListing('latest', $latest_products_count, TRUE, TRUE, FALSE, TRUE, 0, TRUE);
 				$productModel->addImages($this->products['latest'],1);
 			}
 
@@ -111,16 +111,16 @@ class VirtueMartViewVirtueMart extends VmView {
 			$topTen_products_count = $products_per_row * $topTen_products_rows;
 			
 			if (!empty($topTen_products_count) and VmConfig::get('show_topTen', 1)) {
-				$this->products['topten']= $productModel->getProductListing('topten', $topTen_products_count);
+				$this->products['topten']= $productModel->getProductListing('topten', $topTen_products_count, TRUE, TRUE, FALSE, TRUE, 0, TRUE);
 				$productModel->addImages($this->products['topten'],1);
 			}
 			
 			$recent_products_rows = VmConfig::get('recent_products_rows');
 			$recent_products_count = $products_per_row * $recent_products_rows;
-			$recent_products = $productModel->getProductListing('recent');
+			$recent_products = $productModel->getProductListing('recent', TRUE, TRUE, FALSE, TRUE, 0, TRUE);
 			
 			if (!empty($recent_products_count) and VmConfig::get('show_recent', 1) and !empty($recent_products)) {
-				$this->products['recent']= $productModel->getProductListing('recent', $recent_products_count);
+				$this->products['recent']= $productModel->getProductListing('recent', $recent_products_count, TRUE, TRUE, FALSE, TRUE, 0, TRUE);
 				$productModel->addImages($this->products['recent'],1);
 			}
 

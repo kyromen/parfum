@@ -120,11 +120,8 @@ class VirtuemartViewCategory extends VmView {
 			if($this->showproducts){
 			//if(empty($category->category_layout) or $category->category_layout != 'categories') {
 				// Load the products in the given category
-				if ( !isset($_GET['index']) ) {
-					$ids = $productModel->sortSearchListQuery (TRUE, $this->categoryId);
-				} else {
-					$ids = $productModel->getProductsByManufactureIndex ($_GET['index'], $this->categoryId);
-				}
+
+				$ids = $productModel->sortSearchListQuery (TRUE, $this->categoryId, FALSE, FALSE, TRUE);
 
 				$this->perRow = empty($category->products_per_row)? VmConfig::get('products_per_row',3):$category->products_per_row;
 

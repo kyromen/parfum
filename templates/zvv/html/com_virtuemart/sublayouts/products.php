@@ -148,7 +148,23 @@ foreach ($viewData['products'] as $type => $products ) {
 				$ids[] = $product->virtuemart_product_id;
 				$ids = array_merge($ids, $product_model->getProductChildIds($product->virtuemart_product_id));
 			}
-			if ( !empty($ids) ) $child_products = $product_model->getProducts($ids);
+			if ( !empty($ids) ) {
+				$child_products = array();
+				$output = $product_model->getProducts($ids);
+				while (count($output)) {
+					$min_volume = $output[0];
+					$ind = 0;
+					for ($i = 0; !empty($output[$i]); $i++) {
+						if (getCustomField($db, $output[$i]->virtuemart_product_id, 23) > $min_volume) {
+							$min_volume = $output[$i];
+							$ind = $i;
+						}
+					}
+					$child_products[] = $output[$ind];
+					unset($output[$ind]);
+					$output = array_values($output);
+				}
+			}
 			?>
 
 			<?php
@@ -165,8 +181,6 @@ foreach ($viewData['products'] as $type => $products ) {
 					echo shopFunctionsF::renderVmSubLayout('prices',array('product'=>$child_products[$i],'currency'=>$currency)); ?>
 				</div>
 			<?php } ?>
-
-
 
 			<?php if ( count($child_products) > 1 ) {
 				$op_value = 0;

@@ -52,17 +52,17 @@ class VirtueMartViewVirtueMart extends VmView {
 
 		if (VmConfig::get ('feed_featured_published', 1)) {
 			$featured_nb = VmConfig::get('feed_featured_nb');
-			$featured = $productModel->getProductListing ('featured', $featured_nb);
+			$featured = $productModel->getProductListing ('featured', $featured_nb, TRUE, TRUE, FALSE, TRUE, 0, TRUE);
 		}
 
 		if (VmConfig::get ('feed_latest_published', 1)) {
 			$latest_nb = VmConfig::get('feed_latest_nb');
-			$latest = $productModel->getProductListing ('latest', $latest_nb);
+			$latest = $productModel->getProductListing ('latest', $latest_nb, TRUE, TRUE, FALSE, TRUE, 0, TRUE);
 		}
 
 		if ( VmConfig::get ('feed_topten_published', 1)) {
 			$topTen_nb = VmConfig::get('feed_topten_nb');
-			$topten = $productModel->getProductListing ('topten',$topTen_nb);
+			$topten = $productModel->getProductListing ('topten',$topTen_nb, TRUE, TRUE, FALSE, TRUE, 0, TRUE);
 		}
 		$products = array_merge ($products, $featured, $latest, $topten);
 		if ($feed_show_images == 1) {

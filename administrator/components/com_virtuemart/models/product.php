@@ -222,7 +222,7 @@ class VirtueMartModelProduct extends VmModel {
 	 *
 	 * @author Max Milbers
 	 */
-	function sortSearchListQuery ($onlyPublished = TRUE, $virtuemart_category_id = FALSE, $group = FALSE, $nbrReturnProducts = FALSE, $langFields = array()) {
+	function sortSearchListQuery ($onlyPublished = TRUE, $virtuemart_category_id = FALSE, $group = FALSE, $nbrReturnProducts = FALSE, $only_parent_products=false, $langFields = array()) {
 
 		$app = JFactory::getApplication ();
 		$db = JFactory::getDbo();
@@ -470,6 +470,7 @@ class VirtueMartModelProduct extends VmModel {
 			if(!empty($onlyPublished) and $isSite){
 				$where[] = ' p.`published`="1" ';
 			}
+			if ($only_parent_products) { $where[] = ' p.`product_parent_id`="0" '; }
 			if(!empty($this->virtuemart_vendor_id)){
 				$where[] = ' p.`virtuemart_vendor_id` = "'.$this->virtuemart_vendor_id.'" ';
 			}
@@ -1327,7 +1328,7 @@ class VirtueMartModelProduct extends VmModel {
 	 *
 	 * @author Max Milbers
 	 */
-	public function getProductListing ($group = FALSE, $nbrReturnProducts = FALSE, $withCalc = TRUE, $onlyPublished = TRUE, $single = FALSE, $filterCategory = TRUE, $category_id = 0) {
+	public function getProductListing ($group = FALSE, $nbrReturnProducts = FALSE, $withCalc = TRUE, $onlyPublished = TRUE, $single = FALSE, $filterCategory = TRUE, $category_id = 0, $only_parent_products=false) {
 
 		$app = JFactory::getApplication ();
 		if ($app->isSite ()) {
@@ -1354,7 +1355,7 @@ class VirtueMartModelProduct extends VmModel {
 		else {
 			$this->virtuemart_category_id = FALSE;
 		}
-		$ids = $this->sortSearchListQuery ($onlyPublished, $this->virtuemart_category_id, $group, $nbrReturnProducts);
+		$ids = $this->sortSearchListQuery ($onlyPublished, $this->virtuemart_category_id, $group, $nbrReturnProducts, $only_parent_products);
 
 		//quickndirty hack for the BE list, we can do that, because in vm2.1 this is anyway fixed correctly
 		$this->listing = TRUE;

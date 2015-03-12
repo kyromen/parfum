@@ -31,12 +31,12 @@ $db = JFactory::getDBO();
 $product_model = VmModel::getModel('product');
 $ids = array();
 if ($this->product->product_parent_id != 0) {
-	$ids = $product_model->getProductChildIds($this->product->product_parent_id);
-	$ids[] = $this->product->product_parent_id;
+	$ids = array($this->product->product_parent_id);
+	$ids = array_merge($ids, $product_model->getProductChildIds($this->product->product_parent_id));
 	unset($ids[array_search($this->product->virtuemart_product_id, $ids)]);
 }
 else {
-	$ids = $product_model->getProductChildIds($this->product->virtuemart_product_id);
+	$ids = array_merge($ids, $product_model->getProductChildIds($this->product->virtuemart_product_id));
 }
 $child_products = $product_model->getProducts($ids);
 //

@@ -183,8 +183,7 @@ jQuery.noConflict();
             });
         })
 
-
-        $( "select.custom-volume" ).change( function() {
+        $( '#contentCenter' ).on('change', "select.custom-volume", function() {
             var ind = this.selectedIndex;
 
             $( this ).parent().find( '.vm3pr-2' ).css( { "display": "none" } );

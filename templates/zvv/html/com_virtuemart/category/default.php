@@ -74,7 +74,7 @@ if ( strstr ( JURI::current(), "/manufacturer/" ) ) {
 
 			<?php if ( !empty($manufacturer->mf_desc) ) { ?>
 				<div class="manuf-desc">
-					<p><?php echo str_replace( "\n", '</p><p>', $manufacturer->mf_desc ); ?></p>
+					<p><?php echo $manufacturer->mf_desc; ?></p>
 				</div>
 			<?php } ?>
 		</div>
