@@ -173,7 +173,7 @@ foreach ($viewData['products'] as $type => $products ) {
 			?>
 
 			<?php if ( !empty($p_type) ) { ?>
-				<span class="pr_type"><?php echo JHtml::link ($child_products[0]->link.$ItemidStr, ucfirst($p_type)); ?></span>
+				<span class="pr_type"><?php echo ucfirst($p_type); ?></span>
 			<?php } ?>
 
 			<?php for ($i = 0; $i < count($child_products); $i++) { ?>

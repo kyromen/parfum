@@ -71,7 +71,7 @@ table.horizontbox td,table.horizontbox tr { vertical-align:middle; text-align:ce
 table.horizontbox td li { text-align:left; }
 div.horizontbox { float:left; width:24.4%; }
 .horizontbox select { width:90%; }
-.mcf_form select { max-width:100%; }
+.mcf_form select { width:100%; }
 .mcf_tip { font-size:80%; line-height:80%; cursor:pointer; color:#666; vertical-align:text-top; }
 form.mcf_mod_ajax_div input[type=submit] { display:none; }
 
@@ -167,8 +167,12 @@ form.mcf_form {
 	/*min-height: 40px;*/
 /*}*/
 
-.custom_params ul.values li input + span, .filter_manufacturers ul.values li input +  span {
+.custom_params ul.values li input + span, .filter_manufacturers ul.values li input + span {
 	display: block;
 	float: left;
 	width: 65%;
+}
+
+.custom_params ul.values li input + span:first-letter, .filter_manufacturers ul.values li input + span:first-letter {
+	text-transform: uppercase;
 }

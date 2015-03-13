@@ -28,7 +28,6 @@ if ( !empty($this->manufacturers) ) { ?>
                 $j += 1;
             }
         }
-        $brands[$j] = $manufacturer;
         $indexes[$i] = $brands;
 
         foreach ( $indexes as $brands ) {
