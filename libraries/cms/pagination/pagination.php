@@ -702,7 +702,7 @@ class JPagination
 		{
 			JHtml::_('bootstrap.tooltip');
 			$title = ' title="' . $item->text . '"';
-			$class = 'hasTooltip ';
+			$class = 'pagenav ';
 		}
 
 		if ($app->isAdmin())
