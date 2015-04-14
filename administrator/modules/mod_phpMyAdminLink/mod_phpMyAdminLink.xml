@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" client="administrator" version="1.6" method="upgrade">
+	<name>phpMyAdminLink</name>
+	<author>Emil Bohach</author>
+	<creationDate>Oct 26 2012</creationDate>
+	<copyright>(C) 2012 Emil I Bohach  and 2008 Schwarz Computer Systeme. All rights reserved.</copyright>
+	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+	<authorEmail>eib@eibconsult.com</authorEmail>
+	<authorUrl>www.eibconsult.com</authorUrl>
+	<version>1.1</version>
+	<description>
+		<![CDATA[
+			<h1>phpMyAdminLink  Module for Joomla 2.5/3.0 Admin/Backend</h1>
+			<h2>&nbsp;Vers. 1.1  Oct 26, 2012</h2>
+			<h2>&nbsp;from Emil I Bohach   @  <a href="http://eibconsult.com/" target="_blank" title="eibconsult.com"><span>eibconsult.com</span></a></h2>
+			<div align=left>
+			Creates a link, in the admin status area, to your phpMyAdmin program (either local or remote) for quick access without needing to go through the web hosts control panel.
+			<br>
+			<ol><h3>4 steps to implement.</h3>
+				<li>Set the position of the module to status.</li>
+				<li>Set the URL of your web hosts phpMyAdmin
+					(the default shows how most local phpMyadmin programs are accessed).</li>
+				<li>Determine allowed viewers/users of this link.</li>
+				<li>Publish and save it.</li>
+			</ol>
+			The phpMyAdmin link should now appear in the status bar at the top.
+			<br /><br />
+			 This module is a fork of the original JooMyAdminLite module for Joomla 1.5  from Matthias Krauser
+			<br /><br />
+			</div>
+		]]>
+	</description>
+	<files>
+		<filename module="mod_phpMyAdminLink">mod_phpMyAdminLink.php</filename>
+		<filename module="mod_phpMyAdminLink">phpMyAdmin_logo.png</filename>
+		<filename module="mod_phpMyAdminLink">index.html</filename>
+	</files>
+	<languages folder="language">
+        <language tag="en-GB">en-GB.mod_phpMyAdminLink.ini</language>
+        <language tag="en-GB">en-GB.mod_phpMyAdminLink.sys.ini</language>
+    </languages>
+	<config>
+		<fields name="params">
+			<fieldset name="basic" label="Module Parameters">
+				<field
+					name="target"
+					type="text"
+					default="http://localhost/phpmyadmin/"
+					label="MYADMINLINK_URL"
+					description="MYADMINLINK_URL_DESC">
+				</field>
+				<field
+					name="allowed_viewers"
+					type="list"
+					default="6"
+					label="MYADMINLINK_ALLOWED_VIEWERS"
+					description="MYADMINLINK_ALLOWED_VIEWERS_DESC">
+					<option value="8">MYADMINLINK_ALLOW_SUPERS</option>
+					<option value="7">MYADMINLINK_ALLOW_ADMINS</option>
+					<option value="6">MYADMINLINK_ALLOW_ALL</option>
+				</field>
+		<!--
+				<field
+					name="localtarget"
+					type="text"
+					default="http://"
+					label="MYADMINLINK_LOCAL_URL"
+					description="MYADMINLINK_LOCAL_URL_DESC">
+				</field>
+		-->
+			</fieldset>
+		</fields>
+	</config>	
+</extension>

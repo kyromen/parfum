@@ -1,0 +1,15 @@
+/awstats/*
+/administrator/cache/*
+/administrator/components/com_akeeba/backup/*
+/tmp/*
+/bin/*
+/cli/*
+/cache/*
+/dump/*
+/installation/*
+/log/*
+/logs/*
+/backup/*
+*.zip
+*.log
+/configuration.php
