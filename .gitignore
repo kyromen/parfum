@@ -5,11 +5,17 @@
 /bin/*
 /cli/*
 /cache/*
+<<<<<<< HEAD
 /dump/*
 /installation/*
 /log/*
 /logs/*
 /backup/*
+=======
+/installation/*
+/log/*
+/logs/*
+>>>>>>> a00b43b0b4fa88bc3e016539f9c33e73a7ae6602
 *.zip
 *.log
 /configuration.php
