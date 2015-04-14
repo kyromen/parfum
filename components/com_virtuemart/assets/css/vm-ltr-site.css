@@ -263,7 +263,7 @@ td.orders-key{font-weight: bold; text-align: left; }
 .product-field-type-P .product-fields-title{ font-size: 120%;}
 .product-field-type-B,.product-field-type-S,.product-field-type-I,{float:left;text-align: left;}
 .product-field-type-R{float:left;margin:0 1em;}
-.product-fields-title-wrapper{min-width:10em; font-weight: bold;padding:0.5em 0;}
+/*.product-fields-title-wrapper{min-width:10em; padding:0.5em 0;}*/
 
 .vm-customfield-mod img,.vm-customfield-cart img{ vertical-align: middle; width: 16px;}
 .vm-img-desc{display:block;}
@@ -416,9 +416,9 @@ div.product_horizon div.product {float:left;border:1px solid #ddd;margin:0.3%;mi
 .childs-block td .pr_link a:hover { text-decoration: underline; }
 
 .product-fields-value ul { list-style: none; list-style-image: none; margin: 0; padding: 0; }
-.mcf-fields-title, .product-fields-value ul li, .productdetails-view .manufacturer *, .productdetails-view .price_title, .productdetails-view  .productInfoGeneral * { float: left; font-family: "PFDinTextCondProRegular"; font-size: 14px; text-transform: uppercase; }
-.productdetails-view  .manufacturer .bold, .mcf-fields-title, .productdetails-view .price_title, .productdetails-view  .productInfoGeneral > span:first-child { color: #b6b6b6; display: block; width: 212px; margin-bottom: 18px; }
-.productdetails-view .product-fields-value, .productdetails-view  .productInfoGeneral span:last-child { display: block; float: right; width: 222px; padding-bottom: 18px;}
+.mcf-fields-title, .product-fields-value ul li, .productdetails-view .manufacturer *, .productdetails-view .price_title, .productdetails-view  .productInfoGeneral *, .productdetails-view .product-fields * { float: left; font-family: "PFDinTextCondProRegular"; font-size: 14px; text-transform: uppercase; }
+.productdetails-view  .manufacturer .bold, .mcf-fields-title, .productdetails-view .price_title, .productdetails-view  .productInfoGeneral > span:first-child, .productdetails-view .product-fields .product-fields-title { color: #b6b6b6; display: block; width: 212px; margin-bottom: 18px; }
+.productdetails-view .product-fields-value, .productdetails-view  .productInfoGeneral span:last-child, .productdetails-view .product-fields .product-field-display { display: block; float: right; width: 222px; padding-bottom: 18px;}
 .productdetails-view .price_title + .product-price > div > span { margin-top: -18px; font-size: 36px; }
 .productdetails-view .price_title + .product-price > div.PricebasePrice { display: none; }
 .product-fields-value ul li { color: black; }

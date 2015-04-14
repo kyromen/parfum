@@ -423,5 +423,24 @@ class VirtueMartModelCustom extends VmModel {
 		return true;
 	}
 
+	function getCustomValue($pr_id, $custom_id) {
+		$sql= "SELECT customsforall_value_name as value
+				FROM #__virtuemart_custom_plg_customsforall_values
+				WHERE customsforall_value_id = (SELECT customsforall_value_id
+												FROM #__virtuemart_product_custom_plg_customsforall AS t1
+												WHERE t1.customfield_id = (SELECT virtuemart_customfield_id
+																			FROM #__virtuemart_product_customfields as t2
+																			WHERE t2.virtuemart_product_id = " . $pr_id .
+																				 " and t2.virtuemart_custom_id = " . $custom_id . " LIMIT 1) LIMIT 1);";
+		$db = JFactory::getDBO();
+		$db->setQuery($sql);
+		$db->query();
+		$out = $db->loadAssocList();
+		if ( !empty($out[0]['value']) ) {
+			return $out[0]['value'];
+		} else {
+			return "";
+		}
+	}
 }
 // pure php no closing tag

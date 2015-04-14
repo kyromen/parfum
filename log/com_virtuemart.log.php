@@ -777,3 +777,9 @@ ew_aromium.ru\public_html\images\stories\virtuemart\product\325.jpg
 ew_aromium.ru\public_html\images\stories\virtuemart\product\325.jpg
 2015-04-13 05:48:20 ERROR vmError: Couldnt create thumb, file not found D:\Server\domains
 ew_aromium.ru\public_html\images\stories\virtuemart\product\325.jpg
+2015-04-14 14:05:33 ERROR vmError: Max execution time reached in model product getProduct() 169
+2015-04-14 14:05:33 ERROR vmError: Max execution time reached in model product getProduct() 169
+2015-04-14 14:05:33 ERROR vmError: Max execution time reached in model product getProduct() 169
+2015-04-14 14:11:19 ERROR vmError: Max execution time reached in model product getProduct() 169
+2015-04-14 14:11:19 ERROR vmError: Max execution time reached in model product getProduct() 169
+2015-04-14 14:11:19 ERROR vmError: Max execution time reached in model product getProduct() 169

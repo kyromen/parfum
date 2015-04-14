@@ -17,20 +17,7 @@ $showRating = $viewData['showRating'];
 $verticalseparator = " vertical-separator";
 
 $product_model = VmModel::getModel('product');
-
-$db = JFactory::getDBO();
-
-function getCustomField($db, $pr_id, $custom_id) {
-	$sql= "SELECT value FROM #__virtuemart_product_custom_plg_param_values WHERE id = (SELECT val FROM #__virtuemart_product_custom_plg_param_ref AS t1 WHERE t1.virtuemart_product_id = " . $pr_id . " and t1.virtuemart_custom_id = " . $custom_id . " LIMIT 1);";
-	$db->setQuery($sql);
-	$db->query();
-	$out = $db->loadAssocList();
-	if ( !empty($out[0]['value']) ) {
-		return $out[0]['value'];
-	} else {
-		return "";
-	}
-}
+$custom_model = VmModel::getModel('custom');
 
 echo shopFunctionsF::renderVmSubLayout('askrecomjs');
 
@@ -155,7 +142,7 @@ foreach ($viewData['products'] as $type => $products ) {
 					$min_volume = $output[0];
 					$ind = 0;
 					for ($i = 0; !empty($output[$i]); $i++) {
-						if (getCustomField($db, $output[$i]->virtuemart_product_id, 23) > $min_volume) {
+						if ($custom_model->getCustomValue($product->virtuemart_product_id, 23) > $min_volume) {
 							$min_volume = $output[$i];
 							$ind = $i;
 						}
@@ -168,8 +155,8 @@ foreach ($viewData['products'] as $type => $products ) {
 			?>
 
 			<?php
-			$p_volume = getCustomField($db,$child_products[0]->virtuemart_product_id, 23);
-			$p_type = getCustomField($db,$child_products[0]->virtuemart_product_id, 2);
+			$p_volume = $custom_model->getCustomValue($product->virtuemart_product_id, 23);
+			$p_type = $custom_model->getCustomValue($product->virtuemart_product_id, 2);
 			?>
 
 			<?php if ( !empty($p_type) ) { ?>
@@ -190,7 +177,7 @@ foreach ($viewData['products'] as $type => $products ) {
 					<select class="custom-volume">
 						<?php foreach ($child_products as $pr) { ?>
 							<?php
-							$p_volume = getCustomField($db,$pr->virtuemart_product_id, 23)
+							$p_volume = $custom_model->getCustomValue($pr->virtuemart_product_id, 23);
 							?>
 							<?php if ( !empty($p_volume) ) { ?>
 								<option value="<?php $op_value++; echo $op_value; ?>"><?php echo $p_volume; ?></option>
