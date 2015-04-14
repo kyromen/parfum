@@ -653,3 +653,127 @@
 2015-03-04 07:58:08 ERROR vmError: Max execution time reached in model product getProduct() 25
 2015-03-04 20:02:31 ERROR vmError: Couldnt create thumb, file not found /srv/1001parfum.ru/images/stories/virtuemart/manufacturer/kativa.jpg
 2015-03-04 20:02:31 ERROR vmError: Couldnt create thumb, file not found /srv/1001parfum.ru/images/stories/virtuemart/manufacturer/marlies-moller.jpg
+2015-03-04 20:55:49 ERROR vmError: Couldnt create thumb, file not found D:\Server\domains\1001parfum.ru\public_html\images\stories\virtuemart\manufacturer\kativa.jpg
+2015-03-04 20:55:49 ERROR vmError: Couldnt create thumb, file not found D:\Server\domains\1001parfum.ru\public_html\images\stories\virtuemart\manufacturer\marlies-moller.jpg
+2015-03-12 15:44:36 ERROR vmError: Couldnt create thumb, file not found D:\Server\domains\1001parfum.ru\public_html\images\stories\virtuemart\manufacturer\kativa.jpg
+2015-03-12 15:44:36 ERROR vmError: Couldnt create thumb, file not found D:\Server\domains\1001parfum.ru\public_html\images\stories\virtuemart\manufacturer\marlies-moller.jpg
+2015-03-12 15:45:00 ERROR vmError: Couldnt create thumb, file not found D:\Server\domains\1001parfum.ru\public_html\images\stories\virtuemart\manufacturer\kativa.jpg
+2015-03-12 15:45:00 ERROR vmError: Couldnt create thumb, file not found D:\Server\domains\1001parfum.ru\public_html\images\stories\virtuemart\manufacturer\marlies-moller.jpg
+2015-03-12 15:45:56 ERROR vmError: Couldnt create thumb, file not found D:\Server\domains\1001parfum.ru\public_html\images\stories\virtuemart\manufacturer\kativa.jpg
+2015-03-12 15:45:56 ERROR vmError: Couldnt create thumb, file not found D:\Server\domains\1001parfum.ru\public_html\images\stories\virtuemart\manufacturer\marlies-moller.jpg
+2015-03-12 15:47:51 ERROR vmError: Couldnt create thumb, file not found D:\Server\domains\1001parfum.ru\public_html\images\stories\virtuemart\manufacturer\kativa.jpg
+2015-03-12 15:47:51 ERROR vmError: Couldnt create thumb, file not found D:\Server\domains\1001parfum.ru\public_html\images\stories\virtuemart\manufacturer\marlies-moller.jpg
+2015-03-25 18:59:09 ERROR vmError: Couldnt create thumb, file not found D:\Server\domains
+ew_aromium.ru\public_html\images\stories\virtuemart\product\2336.jpg
+2015-03-25 18:59:09 ERROR vmError: Couldnt create thumb, file not found D:\Server\domains
+ew_aromium.ru\public_html\images\stories\virtuemart\product\295.jpg
+2015-03-25 18:59:09 ERROR vmError: Couldnt create thumb, file not found D:\Server\domains
+ew_aromium.ru\public_html\images\stories\virtuemart\product\353.jpg
+2015-03-25 18:59:09 ERROR vmError: Couldnt create thumb, file not found D:\Server\domains
+ew_aromium.ru\public_html\images\stories\virtuemart\product\297.jpg
+2015-03-25 18:59:09 ERROR vmError: Couldnt create thumb, file not found D:\Server\domains
+ew_aromium.ru\public_html\images\stories\virtuemart\product\505.jpg
+2015-03-25 18:59:09 ERROR vmError: Couldnt create thumb, file not found D:\Server\domains
+ew_aromium.ru\public_html\images\stories\virtuemart\product\142.jpg
+2015-03-25 18:59:09 ERROR vmError: Couldnt create thumb, file not found D:\Server\domains
+ew_aromium.ru\public_html\images\stories\virtuemart\product\406.jpg
+2015-03-25 18:59:09 ERROR vmError: Couldnt create thumb, file not found D:\Server\domains
+ew_aromium.ru\public_html\images\stories\virtuemart\product\629.jpg
+2015-03-25 18:59:09 ERROR vmError: Couldnt create thumb, file not found D:\Server\domains
+ew_aromium.ru\public_html\images\stories\virtuemart\product\1506.jpg
+2015-03-25 18:59:09 ERROR vmError: Couldnt create thumb, file not found D:\Server\domains
+ew_aromium.ru\public_html\images\stories\virtuemart\product\2668.jpg
+2015-03-25 18:59:09 ERROR vmError: Couldnt create thumb, file not found D:\Server\domains
+ew_aromium.ru\public_html\images\stories\virtuemart\product\2649.jpg
+2015-03-25 18:59:09 ERROR vmError: Couldnt create thumb, file not found D:\Server\domains
+ew_aromium.ru\public_html\images\stories\virtuemart\product\100.jpg
+2015-03-25 18:59:16 ERROR vmError: Couldnt create thumb, file not found D:\Server\domains
+ew_aromium.ru\public_html\images\stories\virtuemart\product\536.jpg
+2015-03-25 18:59:16 ERROR vmError: Couldnt create thumb, file not found D:\Server\domains
+ew_aromium.ru\public_html\images\stories\virtuemart\product\644.jpg
+2015-03-25 18:59:16 ERROR vmError: Couldnt create thumb, file not found D:\Server\domains
+ew_aromium.ru\public_html\images\stories\virtuemart\product\1260.jpg
+2015-03-25 18:59:16 ERROR vmError: Couldnt create thumb, file not found D:\Server\domains
+ew_aromium.ru\public_html\images\stories\virtuemart\product\2179.jpg
+2015-03-25 18:59:16 ERROR vmError: Couldnt create thumb, file not found D:\Server\domains
+ew_aromium.ru\public_html\images\stories\virtuemart\product\282.jpg
+2015-03-25 18:59:16 ERROR vmError: Couldnt create thumb, file not found D:\Server\domains
+ew_aromium.ru\public_html\images\stories\virtuemart\product\541.jpg
+2015-03-25 18:59:16 ERROR vmError: Couldnt create thumb, file not found D:\Server\domains
+ew_aromium.ru\public_html\images\stories\virtuemart\product\742.jpg
+2015-03-25 18:59:16 ERROR vmError: Couldnt create thumb, file not found D:\Server\domains
+ew_aromium.ru\public_html\images\stories\virtuemart\product\1292.jpg
+2015-03-25 18:59:16 ERROR vmError: Couldnt create thumb, file not found D:\Server\domains
+ew_aromium.ru\public_html\images\stories\virtuemart\product\2209.jpg
+2015-03-25 18:59:16 ERROR vmError: Couldnt create thumb, file not found D:\Server\domains
+ew_aromium.ru\public_html\images\stories\virtuemart\product\1108.jpg
+2015-03-25 18:59:16 ERROR vmError: Couldnt create thumb, file not found D:\Server\domains
+ew_aromium.ru\public_html\images\stories\virtuemart\product\1464.jpg
+2015-03-25 18:59:16 ERROR vmError: Couldnt create thumb, file not found D:\Server\domains
+ew_aromium.ru\public_html\images\stories\virtuemart\product\746.jpg
+2015-03-25 18:59:21 ERROR vmError: Couldnt create thumb, file not found D:\Server\domains
+ew_aromium.ru\public_html\images\stories\virtuemart\product\8.jpg
+2015-03-25 18:59:21 ERROR vmError: Couldnt create thumb, file not found D:\Server\domains
+ew_aromium.ru\public_html\images\stories\virtuemart\product\620.jpg
+2015-03-25 18:59:21 ERROR vmError: Couldnt create thumb, file not found D:\Server\domains
+ew_aromium.ru\public_html\images\stories\virtuemart\product\1194.jpg
+2015-03-25 18:59:21 ERROR vmError: Couldnt create thumb, file not found D:\Server\domains
+ew_aromium.ru\public_html\images\stories\virtuemart\product\2005.jpg
+2015-03-25 18:59:21 ERROR vmError: Couldnt create thumb, file not found D:\Server\domains
+ew_aromium.ru\public_html\images\stories\virtuemart\product\630.jpg
+2015-03-25 18:59:21 ERROR vmError: Couldnt create thumb, file not found D:\Server\domains
+ew_aromium.ru\public_html\images\stories\virtuemart\product\539.jpg
+2015-03-25 18:59:21 ERROR vmError: Couldnt create thumb, file not found D:\Server\domains
+ew_aromium.ru\public_html\images\stories\virtuemart\product\94.jpg
+2015-03-25 18:59:21 ERROR vmError: Couldnt create thumb, file not found D:\Server\domains
+ew_aromium.ru\public_html\images\stories\virtuemart\product\645.jpg
+2015-03-25 18:59:21 ERROR vmError: Couldnt create thumb, file not found D:\Server\domains
+ew_aromium.ru\public_html\images\stories\virtuemart\product\1209.jpg
+2015-03-25 18:59:21 ERROR vmError: Couldnt create thumb, file not found D:\Server\domains
+ew_aromium.ru\public_html\images\stories\virtuemart\product\2036.jpg
+2015-03-25 18:59:21 ERROR vmError: Couldnt create thumb, file not found D:\Server\domains
+ew_aromium.ru\public_html\images\stories\virtuemart\product\1008.jpg
+2015-03-25 18:59:21 ERROR vmError: Couldnt create thumb, file not found D:\Server\domains
+ew_aromium.ru\public_html\images\stories\virtuemart\product\540.jpg
+2015-03-25 18:59:26 ERROR vmError: Couldnt create thumb, file not found D:\Server\domains
+ew_aromium.ru\public_html\images\stories\virtuemart\product\555.jpg
+2015-03-25 18:59:26 ERROR vmError: Couldnt create thumb, file not found D:\Server\domains
+ew_aromium.ru\public_html\images\stories\virtuemart\product\256.jpg
+2015-03-25 18:59:26 ERROR vmError: Couldnt create thumb, file not found D:\Server\domains
+ew_aromium.ru\public_html\images\stories\virtuemart\product\1507.jpg
+2015-03-25 18:59:26 ERROR vmError: Couldnt create thumb, file not found D:\Server\domains
+ew_aromium.ru\public_html\images\stories\virtuemart\product\588.jpg
+2015-03-25 18:59:26 ERROR vmError: Couldnt create thumb, file not found D:\Server\domains
+ew_aromium.ru\public_html\images\stories\virtuemart\product\642.jpg
+2015-03-25 18:59:26 ERROR vmError: Couldnt create thumb, file not found D:\Server\domains
+ew_aromium.ru\public_html\images\stories\virtuemart\product\875.jpg
+2015-03-25 18:59:26 ERROR vmError: Couldnt create thumb, file not found D:\Server\domains
+ew_aromium.ru\public_html\images\stories\virtuemart\product\953.jpg
+2015-03-25 18:59:26 ERROR vmError: Couldnt create thumb, file not found D:\Server\domains
+ew_aromium.ru\public_html\images\stories\virtuemart\product\1127.jpg
+2015-03-25 18:59:26 ERROR vmError: Couldnt create thumb, file not found D:\Server\domains
+ew_aromium.ru\public_html\images\stories\virtuemart\product\1227.jpg
+2015-03-25 18:59:26 ERROR vmError: Couldnt create thumb, file not found D:\Server\domains
+ew_aromium.ru\public_html\images\stories\virtuemart\product\1920.jpg
+2015-03-25 18:59:26 ERROR vmError: Couldnt create thumb, file not found D:\Server\domains
+ew_aromium.ru\public_html\images\stories\virtuemart\product\2130.jpg
+2015-03-25 18:59:26 ERROR vmError: Couldnt create thumb, file not found D:\Server\domains
+ew_aromium.ru\public_html\images\stories\virtuemart\product\2270.jpg
+2015-04-13 05:38:49 ERROR vmError: Couldnt create thumb, file not found D:\Server\domains
+ew_aromium.ru\public_html\images\stories\virtuemart\product\509.jpg
+2015-04-13 05:38:55 ERROR vmError: Couldnt create thumb, file not found D:\Server\domains
+ew_aromium.ru\public_html\images\stories\virtuemart\product\505.jpg
+2015-04-13 05:38:55 ERROR vmError: Couldnt create thumb, file not found D:\Server\domains
+ew_aromium.ru\public_html\images\stories\virtuemart\product\509.jpg
+2015-04-13 05:39:02 ERROR vmError: Couldnt create thumb, file not found D:\Server\domains
+ew_aromium.ru\public_html\images\stories\virtuemart\product\509.jpg
+2015-04-13 05:45:45 ERROR vmError: Couldnt create thumb, file not found D:\Server\domains
+ew_aromium.ru\public_html\images\stories\virtuemart\product\325.jpg
+2015-04-13 05:46:00 ERROR vmError: Couldnt create thumb, file not found D:\Server\domains
+ew_aromium.ru\public_html\images\stories\virtuemart\product\325.jpg
+2015-04-13 05:46:51 ERROR vmError: Couldnt create thumb, file not found D:\Server\domains
+ew_aromium.ru\public_html\images\stories\virtuemart\product\325.jpg
+2015-04-13 05:48:12 ERROR vmError: Couldnt create thumb, file not found D:\Server\domains
+ew_aromium.ru\public_html\images\stories\virtuemart\product\325.jpg
+2015-04-13 05:48:20 ERROR vmError: Couldnt create thumb, file not found D:\Server\domains
+ew_aromium.ru\public_html\images\stories\virtuemart\product\325.jpg

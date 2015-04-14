@@ -134,3 +134,40 @@
 2015-03-04T12:50:07+00:00 DEBUG Successful login by alex from IP address 127.0.0.1
 2015-03-04T19:05:05+00:00 DEBUG Successful login by alex from IP address 127.0.0.1
 2015-03-04T20:46:02+00:00 DEBUG Successful login by alex from IP address 127.0.0.1
+2015-03-12T16:36:17+00:00 DEBUG Successful login by alex from IP address 127.0.0.1
+2015-03-12T16:56:03+00:00 DEBUG Successful login by alex from IP address 127.0.0.1
+2015-03-12T17:39:35+00:00 DEBUG Successful login by alex from IP address 127.0.0.1
+2015-03-12T18:06:07+00:00 DEBUG Successful login by alex from IP address 127.0.0.1
+2015-03-12T18:22:01+00:00 DEBUG Failed login attempt from IP address 127.0.0.1
+2015-03-12T18:22:01+00:00 DEBUG Failed logins: 1; allowed: 3
+2015-03-12T18:22:02+00:00 INFO Sent email to alex.igrychev@gmail.com, subject: 1001parfum: Неудачные попытки http://1001parfum/; not successful: "\u041d\u0435 \u0443\u0434\u0430\u043b\u043e\u0441\u044c \u0432\u044b\u0437\u0432\u0430\u0442\u044c \u0444\u0443\u043d\u043a\u0446\u0438\u044e mail."
+2015-03-12T18:22:14+00:00 DEBUG Failed login attempt from IP address 127.0.0.1
+2015-03-12T18:22:14+00:00 DEBUG Failed logins: 2; allowed: 3
+2015-03-12T18:22:25+00:00 DEBUG Successful login by alex from IP address 127.0.0.1
+2015-03-13T07:18:33+00:00 DEBUG Successful login by alex from IP address 127.0.0.1
+2015-03-13T08:04:11+00:00 DEBUG Successful login by alex from IP address 127.0.0.1
+2015-03-13T13:52:28+00:00 DEBUG Successful login by alex from IP address 127.0.0.1
+2015-03-13T13:59:33+00:00 DEBUG Successful login by alex from IP address 127.0.0.1
+2015-03-13T13:59:43+00:00 DEBUG Successful login by alex from IP address 127.0.0.1
+2015-03-13T14:02:59+00:00 DEBUG Successful login by alex from IP address 127.0.0.1
+2015-03-13T14:03:12+00:00 DEBUG Successful login by alex from IP address 127.0.0.1
+2015-03-13T14:29:00+00:00 DEBUG Successful login by alex from IP address 127.0.0.1
+2015-03-13T14:29:19+00:00 DEBUG Successful login by alex from IP address 127.0.0.1
+2015-03-13T14:52:21+00:00 DEBUG Successful login by alex from IP address 127.0.0.1
+2015-03-13T16:16:11+00:00 DEBUG Successful login by alex from IP address 127.0.0.1
+2015-03-13T16:44:02+00:00 DEBUG Successful login by alex from IP address 127.0.0.1
+2015-03-13T17:52:55+00:00 DEBUG Successful login by alex from IP address 127.0.0.1
+2015-03-13T17:53:53+00:00 DEBUG Successful login by marat from IP address 127.0.0.1
+2015-03-13T17:53:57+00:00 DEBUG Successful login by marat from IP address 127.0.0.1
+2015-03-13T17:54:01+00:00 DEBUG Successful login by alex from IP address 127.0.0.1
+2015-03-13T17:54:34+00:00 DEBUG Successful login by marat from IP address 127.0.0.1
+2015-03-13T17:55:11+00:00 DEBUG Successful login by alex from IP address 127.0.0.1
+2015-03-13T17:55:30+00:00 DEBUG Successful login by marat from IP address 127.0.0.1
+2015-03-13T23:00:24+00:00 DEBUG Successful login by alex from IP address 127.0.0.1
+2015-03-16T17:01:07+00:00 DEBUG Successful login by alex from IP address 127.0.0.1
+2015-03-17T09:25:58+00:00 DEBUG Successful login by alex from IP address 127.0.0.1
+2015-03-20T08:41:39+00:00 DEBUG Successful login by alex from IP address 127.0.0.1
+2015-03-20T09:01:07+00:00 DEBUG Successful login by alex from IP address 127.0.0.1
+2015-03-21T09:00:34+00:00 DEBUG Successful login by alex from IP address 127.0.0.1
+2015-04-13T05:39:27+00:00 DEBUG Successful login by alex from IP address 127.0.0.1
+2015-04-14T10:42:51+00:00 DEBUG Successful login by alex from IP address 127.0.0.1
