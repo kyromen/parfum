@@ -1,0 +1,106 @@
+/* 
+version 5.1.0
+package JotCache
+category Joomla 3.4
+copyright (C) 2010-2015 Vladimir Kanich
+license GNU General Public License version 2 or later
+*/
+.icon-statplugin,.icon-statglobal,.icon-statclear {
+  display: none !important;
+}
+#toolbar-statplugin button.btn,#toolbar-statglobal button.btn,#toolbar-statclear button.btn {
+/*  background-color: #36C7AA !important; 
+  background-image: linear-gradient(to bottom, #36C7AA, green) !important; */
+  background-image: none;
+  border-radius: 5px;
+  color:#fff;
+  font-weight: bold !important;
+}
+#toolbar-statplugin button.btn:focus,#toolbar-statglobal button.btn:focus,#toolbar-statclear button.btn:focus {
+  background-color: silver !important; 
+/*  background-image: linear-gradient(to bottom, #36C7AA, green) !important;  */
+  background-position: 0px !important;
+}
+#toolbar-statplugin button.btn:hover,#toolbar-statglobal button.btn:hover,#toolbar-statclear button.btn:hover {
+/*  background-color: #969696; */
+  background-image: linear-gradient(to bottom, #969696, #303030) !important;
+/*  background-image: none !important;
+  background-image: linear-gradient(to bottom, #36C7AA, green) !important; */
+  background-position: 0px !important;
+}
+#toolbar-popup-help{
+  float:right;
+}
+#markid_chzn{
+  vertical-align:middle;
+  /*font-style: italic;*/
+  font-weight: bold;
+  width: 100px !important;
+/*  color: #fff !important;*/
+/*  position: relative;
+  top:1em;*/
+}
+#markid_chzn a.chzn-single{
+  border-width: 2px;
+}
+#modal-help{
+  width: 980px;
+  height: 760px;
+  left: 30%;
+}
+#modal-help div.modal-body{
+  overflow-y:hidden;
+}
+#toolbar-markid{
+  position:relative;
+}
+#toolbar-refresh{
+  margin-left: 105px;
+}
+#frontForm{
+  margin :0px;
+}
+.icon-cookie:before {
+  content:"\6b";
+  color:#FFBB00;
+}
+.icon-cookie-active:before {
+  content:"\6b";
+  color:#FF6600;
+}
+.icon-refresh:before {
+  content:"\3c";
+  color:#5d1;
+}
+.icon-deleteall:before{
+  content:"\49";
+  color:#FF0000;
+}
+.icon-recache:before{
+  content:"\E001" !important;
+  color:#69c;
+}
+.icon-tplex:before {
+  content:"\E013" !important;
+  color:#FF6600 !important;
+}
+.icon-bcache:before{
+  content:"\E013";
+  color:#08C;
+}
+.icon-48-jotcache-logo {
+  background-image:url("../../../components/com_jotcache/assets/images/jotcache-logo-j16-2.png");
+}
+.status-title{
+  padding-right: 1em;
+  font-weight: bold;
+  color:#999;
+  float:left;
+}
+table.adminlist thead tr td.no-border-select {
+  outline-style:solid;
+  outline-width:1px;
+  outline-color:white;
+  background-color:white;
+}
+

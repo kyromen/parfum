@@ -658,11 +658,8 @@ Class cftools{
 	 */
 	function getCalcRules(){
 		if(empty(self::$calcRules)){
-			$cfinput=CfInput::getInputs();
-			if(!class_exists('VirtueMartModelUser')) require(JPATH_VM_ADMINISTRATOR.DIRECTORY_SEPARATOR.'models'.DIRECTORY_SEPARATOR.'user.php');
-			$usermodel = new VirtueMartModelUser;
-			$currentVMuser = $usermodel->getUser();
-			$virtuemart_shoppergroup_ids =  (array)$currentVMuser->shopper_groups;
+			$cfinput=CfInput::getInputs();			
+			$virtuemart_shoppergroup_ids =  self::getUserShopperGroups();
 
 			$db=JFactory::getDbo();
 			$query=$db->getQuery(true);
@@ -780,9 +777,8 @@ Class cftools{
 	 * @since	1.3
 	 * @return	array
 	 */
-	public static function getUserShopperGroups(){
-		if(!class_exists('VirtueMartModelUser')) require(JPATH_VM_ADMINISTRATOR.DIRECTORY_SEPARATOR.'models'.DIRECTORY_SEPARATOR.'user.php');
-		$usermodel = new VirtueMartModelUser;
+	public static function getUserShopperGroups(){		
+		$usermodel = VmModel::getModel ('user');;
 		$currentVMuser = $usermodel->getUser();
 
 		if(empty(self::$shopper_groups[$currentVMuser->virtuemart_user_id])){

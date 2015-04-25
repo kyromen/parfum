@@ -85,8 +85,8 @@ if(!empty($module_size)){
 	<div class="cf-searchmod-wrapper<?php echo $suffix; ?>" id="cf_wrapp_all_<?php echo $module->id?>">
 		<span class="input-append"> 
 			<input name="q" value="<?php echo $value?>" type="search" placeholder="<?php echo JText::_('MOD_CF_SEARCH_INPUT_PLACEHOLDER')?>" maxlength="100" size="<?php echo $size?>" id="cf-searchmod-input_<?php echo $module->id?>" class="cf-searchmod-input  <?php echo $input_class?>" />
-	
-			<button type="submit" class="btn btn-primary <?php echo $btn_class?>"><?php echo JText::_('MOD_CF_SEARCH_SEARCH')?></button> 
+			
+			<button type="submit" class="btn btn-primary cf_apply_button <?php echo $btn_class?>"><?php echo JText::_('MOD_CF_SEARCH_SEARCH')?></button> 
 		</span>
 
 		<?php

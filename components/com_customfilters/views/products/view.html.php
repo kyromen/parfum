@@ -125,7 +125,7 @@ class CustomfiltersViewProducts extends cfView{
 		$ids=$this->get('ProductListing');
 		$this->products=$productModel->getProducts($ids);		
 		
-		$productModel->addImages($this->products,1);
+		$productModel->addImages($this->products);
 		$model=$this->getModel();
 		//add stock
 		foreach($this->products as $product){

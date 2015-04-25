@@ -2,7 +2,47 @@
 	font-family: 'PFDinTextCondProRegular';
 	src: url('../fonts/pfdintextcondpro-regular-webfont.eot');
 }
+input#cf_apply_button_138 {
+    width: 87%;            
+    color: white;    border: 1px solid black;    font-family: PFDinTextCondProMedium;    font-size: 13px;    text-transform: uppercase;    cursor: pointer;    text-align: center;    
+    background-color: black;    
+    padding: 9px 0;            
+    margin-top: 10px;
+}
+#body { min-width: 950px; }
+div.wrapper { min-width: 950px; max-width: 950px; }
+#content { padding: 0 0px 0 0px; }
+#sideLeft { width: 0px; }
+#sideRight { width: 0px; margin-left:-0px; }
+#contentCenter { padding: 0 0px 0 200px; }
+#contentLeft { width: 200px; }
+#contentRight { width: 0px; margin-left:-0px; }
 
+.cf_filters_list li .cf_option {
+
+  text-transform: capitalize;
+}
+
+input#price_138_0 {
+    margin: 3px;
+    border-radius: 1px;
+    border: 1px solid #ccc;
+}
+button#price_138_button {
+    display: none;
+}
+input#price_138_1 {
+    margin: 3px;      border-radius: 1px;      border: 1px solid #ccc;
+}
+span.cf_clear {
+    display: block;        padding: 3px 10px;    text-align: center;    color: #fff;    font-size: 13px;
+}
+#contentCenter {
+  padding: 0 0px 0 215px!important;
+}
+.cf_filters_list {
+  padding: 0;
+}
 @font-face {
 	font-family: 'PFDinTextCondProRegular';
 	src: url('../fonts/PFDinTextCondPro-Regular.ttf') format('truetype'),
@@ -563,3 +603,5 @@ div.addtocart-popup table #prprice { font-family: "PFDinTextCondProMedium"; font
 #fancybox-close { position: absolute; top: 30px; right: 30px; width: 24px; height: 24px; background: url('/images/close_btn_popup.png'); }
 
 .row .PricebasePrice.vm-display.vm-price-value { margin-top: 10px; }
+
+.manuf-desc h2 { font-family: PFDinTextCondProRegular; font-weight: normal; }

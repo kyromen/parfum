@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- version $Id: jotmarker.xml,v 1.2 2013/02/28 12:25:38 Jot Exp $ -->
+<extension version="3.0" type="plugin" group="system" method="upgrade">
+  <name>JotMarker</name>
+  <author>Vladimir Kanich</author>
+  <creationDate>March 2015</creationDate>
+  <copyright>(C) 2010-2015 Vladimir Kanich. All rights reserved.</copyright>
+  <license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+  <authorEmail>contact_on_web_site@jotcomponents.net</authorEmail>
+  <authorUrl>http://www.jotcomponents.net</authorUrl>
+  <version>5.1.0</version>
+  <description>PLG_SYSTEM_JOTMARKER_XML_DESCRIPTION</description>
+  <files>
+    <filename plugin="jotmarker">jotmarker.php</filename>
+    <filename>index.html</filename>
+    <filename>modules.php</filename>
+  </files>
+</extension>

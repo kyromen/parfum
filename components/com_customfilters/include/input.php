@@ -31,6 +31,7 @@ Class CfInput{
 
 		//use virtuemart variables
 		$component=$jinput->get('option','','cmd');
+		$view=$jinput->get('view','','cmd');
 		$use_vm_vars=$componentparams->get('use_virtuemart_pages_vars',true);
 		if($use_vm_vars && $component=='com_virtuemart') $use_vm_vars=true;
 		else $use_vm_vars=false;
@@ -81,8 +82,9 @@ Class CfInput{
 		//--prices--
 		if($component=='com_customfilters' && $reset_all_filters==false){
 			$var_name='price';
-			$price_from=$jinput->get($var_name.'_from',0,'float');
-			$price_to=$jinput->get($var_name.'_to',0,'float');
+			$prices=$jinput->get('price',array(),'array');
+			if(!empty($prices[0]))$price_from=(float)$prices[0];
+			if(!empty($prices[1]))$price_to=(float)$prices[1];
 
 			//price from should be lower or equal to price to
 			if((!empty($price_from) && empty($price_to)) || (!empty($price_from) && !empty($price_to) && $price_from<=$price_to)){
@@ -135,13 +137,19 @@ Class CfInput{
 					else {//ranges
 						if($cf->disp_type==5 || $cf->disp_type==6)$input_filter='INT';
 						else $input_filter='STRING';//date range and default
-						$custom_from=$jinput->get($var_name.'_from',0,$input_filter);
-						if($custom_from>0){
+						
+						$custom_from=0;
+						$custom_to=0;
+						$custom_range=$jinput->get($var_name,array(),'array');
+						if(!empty($custom_range[0]))$custom_from=$filter->clean($custom_range[0],$input_filter);
+						if(!empty($custom_range[1]))$custom_to=$filter->clean($custom_range[1],$input_filter);
+						
+						
+						if(!empty($custom_from) && $custom_from>0){
 							$rangeVars[]=$var_name;
 							$selected_flt[$var_name][0]=$custom_from;
 						}
-						$custom_to=$jinput->get($var_name.'_to',0,$input_filter);
-						if($custom_to>0){
+						if(!empty($custom_to) && $custom_to>0){ 
 							if(!in_array($var_name, $rangeVars))$rangeVars[]=$var_name;
 							$selected_flt[$var_name][1]=$custom_to;
 						}
@@ -177,7 +185,7 @@ Class CfInput{
 	 * @since	1.6.0
 	 * @author	Sakis Terz
 	 */
-	public static function getInputsPerFilter($module=''){
+	public function getInputsPerFilter($module=''){
 		if(empty($module))return;
 		$module_id=	$module->id;
 		if(!isset(self::$cfInputsPerFilter[$module_id])){
@@ -215,7 +223,7 @@ Class CfInput{
 	 * @author	Sakis Terz
 	 * @since	1.6.0
 	 */
-	public static function setCustomFiltersToOrder($filters_order,$selected_fl){
+	public function setCustomFiltersToOrder($filters_order,$selected_fl){
 		$custom_f_pos=array_search('custom_f', $filters_order);
 		if($custom_f_pos===false)return $filters_order;
 		$first_portion=array_slice($filters_order,0, $custom_f_pos);
