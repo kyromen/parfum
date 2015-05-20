@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+version 5.1.0
+package JotCache
+category Joomla 3.4
+copyright (C) 2010-2015 Vladimir Kanich
+license GNU General Public License version 2 or later
+-->
+<extension type="package" version="3.0" method="upgrade">
+  <name>JotCache</name>
+  <author>Vladimir Kanich</author>
+  <creationDate>March 2015</creationDate>
+  <packagename>jotcache</packagename>
+  <version>5.1.0</version>
+  <url>http://www.jotcomponents.net</url>
+  <packager>JotComponents</packager>
+  <packagerurl>http://www.jotcomponents.net/web-programming/jotcache</packagerurl>
+  <description>PKG_JOTCACHE_XML_DESCRIPTION</description>
+  <scriptfile>pkg_script.php</scriptfile>
+  <files folder="packages">
+    <file type="component" id="com_jotcache">com_jotcache_5.1.0_j34.zip</file>
+    <file type="plugin" id="jotcache" group="system">plg_system_jotcache_5.1.0_j34.zip</file>
+    <file type="plugin" id="jotmarker" group="system">plg_system_jotmarker_5.1.0_j34.zip</file>
+    <file type="plugin" id="crawler" group="jotcacheplugins">plg_jotcacheplugins_crawler_5.1.0_j34.zip</file>
+    <file type="plugin" id="crawlerext" group="jotcacheplugins">plg_jotcacheplugins_crawlerext_5.1.0_j34.zip</file>
+    <file type="plugin" id="recache" group="jotcacheplugins">plg_jotcacheplugins_recache_5.1.0_j34.zip</file>
+  </files>
+</extension>
+

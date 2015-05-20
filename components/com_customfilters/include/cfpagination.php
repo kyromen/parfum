@@ -6,14 +6,14 @@
  * @package		customfilters
  * @author		Sakis Terz
  * @link		http://breakdesigns.net
- * @copyright	Copyright (c) 2008 - 2012 breakdesigns.net. All rights reserved.
+ * @copyright	Copyright (c) 2012 - 2015 breakdesigns.net. All rights reserved.
  * @license		http://www.gnu.org/copyleft/gpl.html GNU/GPL, see LICENSE.php
  *				customfilters is free software. This version may have been modified
  *				pursuant to the GNU General Public License, and as distributed
  *				it includes or is derivative of works licensed under the GNU
  *				General Public License or other free or open source software
  *				licenses.
- * @version $Id: cfpagination.php 1 2012-12-22 16:23:00Z sakis $
+ * @version $Id: cfpagination.php 1 2015-03-03 18:50:00Z sakis $
  */
 
 defined('_JEXEC') or die;
@@ -119,22 +119,21 @@ class cfPagination extends JPagination{
 	function getVarsArray(){
 		$jinput=JFactory::getApplication()->input;
 		$query_ar=array();
-		$vars=$jinput->getArray($_REQUEST);
+		$inputs=CfInput::getInputs();
+		$inputs=cftools::encodeInput($inputs);
 
-		foreach($vars as $key=>$val){
+		foreach($inputs as $key=>$val){
 			$is_custom_filter=strpos($key,'custom_f_');
-			if($key=='virtuemart_category_id' || $key=='virtuemart_manufacturer_id' || $is_custom_filter!==false || $key=='price_from' || $key=='price_to' || $key=='Itemid' || $key=='q'){
-				//basic filtering for the variables except custom fields
-				if(is_array($val)){
-					if(count($val)==1 && $is_custom_filter===false && isset($val[0]))$val[0]=(int)$val[0];
-					$val=array_filter($val);
-				}
+			if($key=='virtuemart_category_id' || $key=='virtuemart_manufacturer_id' || $is_custom_filter!==false || $key=='price' || $key=='q'){			
 
 				if(!empty($val)){
 					$query_ar[$key]=$val;
 				}
 			}
 		}
+		
+		$itemId=$jinput->get('Itemid',0,'int');
+		if(!empty($itemId))$query_ar['Itemid']=$itemId;
 		//print_r($query_ar);
 		return $query_ar;
 	}

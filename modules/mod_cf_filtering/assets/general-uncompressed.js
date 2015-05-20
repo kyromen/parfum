@@ -1,4 +1,4 @@
-/* @copyright Copyright (C) 2008 - 2014 breakdesigns.net . All rights reserved.|* @license GNU General Public License version 2 or later;*/
+/* @copyright Copyright (C) 2012 - 2015 breakdesigns.net . All rights reserved.|* @license GNU General Public License version 2 or later;*/
 window.onpopstate = function (e) {
     if (e.state != null) location.href = document.location;
 
@@ -27,16 +27,18 @@ var customFilters = {
                 	if(anchror)var url = anchror.get("href");
                     customFilters.listen(t, this, module_id,url);
                 });
-                document.id("cf_wrapp_all_" + module_id).addEvent("change:relay(select[class=cf_flt],input[type=text][class!=cf_smart_search],input[type=search][class!=cf_smart_search])", function (t) {
+                document.id("cf_wrapp_all_" + module_id).addEvent("change:relay(select[class=cf_flt])", function (t) {
                     t.stop();
                     customFilters.listen(t, this, module_id)
                 })
             }
+            
             /*The module form submit btn*/
             if (customFiltersProp[module_id].results_loading_mode == "ajax" && customFiltersProp[module_id].results_trigger == "btn") {
                 document.id("cf_wrapp_all_" + module_id).addEvent("click:relay(input[type=submit],button[type=submit])", function (t) {
                     t.preventDefault();
-                    customFilters.loadResults(module_id);
+                    //customFilters.loadResults(module_id);
+                    customFilters.listen(t,this,module_id);
                 })
             }
             /*The btn resides in various filters
@@ -45,14 +47,14 @@ var customFilters = {
             document.id("cf_wrapp_all_" + module_id).addEvent("click:relay(button[class=cf_search_button btn])", function (t) { 
                 t.stop();
                 var n = "";
-                var r = "";
-                var i = "";
+                var from_subquery = "";
+                var to_subquery = "";
                 var s = "";
                 var o = this.getProperty("id");
                 var filter_key = o.substr(0, o.indexOf("_button"));
-                var a = document.id(filter_key + "_url").value;
-                var n = a;
-                var f = a.indexOf("?");
+                var filter_base_url = document.id(filter_key + "_url").value;
+                var n = filter_base_url;
+                var f = filter_base_url.indexOf("?");
 
             	var fromField=document.id(filter_key+'_0');
 				var toField=document.id(filter_key+'_1');
@@ -68,20 +70,21 @@ var customFilters = {
 				//is simple input
 				else {
 					var from_value=document.id(filter_key+'_0').value;
-					from_name=document.id(filter_key+'_0').name;
+					from_name=document.id(filter_key+'_0').name;					
 				}
 
                 if (f != -1) var d = "&";
                 else var d = "?"; if (from_value) {
-                    r = from_name + "=" + from_value;
+                    from_subquery = from_name + "=" + from_value;
                 }
                 if (to_value) {
-                    i = to_name + "=" + to_value;
+                    to_subquery = to_name + "=" + to_value;
                 }
-                if (r && !i) s += d + r;
-                else if (!r && i) s += d + i;
-                else s += d + r + "&" + i; 
-                if (s) var url = a + s;
+                if (from_subquery && !to_subquery) s += d + from_subquery;
+                else if (!from_subquery && to_subquery) s += d + to_subquery;
+                else s += d + from_subquery + "&" + to_subquery; 
+                if (s) var url = filter_base_url + s;
+                
                 if (url) {
                     if (customFiltersProp[module_id].results_loading_mode == "ajax") customFilters.listen(t, this, module_id, url);
                     else window.top.location.href = url;
@@ -90,35 +93,88 @@ var customFilters = {
             this.eventsAssigned[module_id] = true
         }
     },
-    listen: function (e, t, module_id, url) {
-    	if(!module_id)return;
-        if (customFiltersProp[module_id].results_loading_mode == "ajax" && customFiltersProp[module_id].results_trigger != "btn") {
-        	//if we use a keyword search in the filtering mod update the search module as well
-        	if(typeof customFiltersProp[module_id].mod_type != "undefined" && customFiltersProp[module_id].mod_type=='filtering'){
-        		query_value='';
-        		var query_input=document.id('q_'+module_id+'_0');
-            	if(query_input){
-            		query_value=query_input.value; 
-            		if(typeof t.id!='undefined' && t.id=='q_'+module_id+'_clear')query_value='';
-            		this.updateSearchModules(query_value);
-            	}
+    listen: function (e, t, module_id, url) {  
+    	if(!module_id)return; 
+    	var formSubmitBtn=false;
+    	//if it is html element, check if it is the module's submit btn
+    	if(typeof t.nodeType!=='undefined')formSubmitBtn=t.hasClass('cf_apply_button'); 
+    	query_value='';
+    	modurl=url;
+    	
+    	//A.get the search query, B. reset the filters by setting a new modurl, if new and there is such setting in the component
+    	if(typeof customFiltersProp[module_id].mod_type != "undefined" && customFiltersProp[module_id].mod_type=='filtering'){
+    		query_value='';
+    		var query_input=document.id('q_'+module_id+'_0');
+        	if(query_input){ 
+        		query_value=query_input.value;
+        		if(typeof customFilters.previousQueryValue=='undefined')customFilters.previousQueryValue=query_value;
+        		
+        		if(customFilters.keyword_search_clear_filters_on_new_search && query_value!=customFilters.previousQueryValue){     
+	        		modurl=customFiltersProp[module_id].base_url+'index.php?option=com_customfilters&view=module&Itemid='+customFiltersProp[module_id].Itemid;
+	        		if(typeof t.id!='undefined' && t.id=='q_'+module_id+'_clear')query_value='';
+			    	 if(query_value){
+			 			//modurl
+			 			if(modurl.indexOf('?')==-1)modurl+='?';
+			         	else modurl+='&';
+			 			modurl+='q='+query_value;
+			         }
+        		}
         	}
+    	}    	
+    	
+    	//Load the results. a)Only when ajax is enabled, b)the results trigger is not button (after every selection), c)The results trigger is btn and the current action regards the button press/submit    	
+        if (customFiltersProp[module_id].results_loading_mode == "ajax" && (customFiltersProp[module_id].results_trigger != "btn" || (customFiltersProp[module_id].results_trigger == "btn" &&  formSubmitBtn))) {
+        	//if we use a keyword search in the filtering mod update the search module as well
+        	if(typeof customFiltersProp[module_id].mod_type != "undefined" && customFiltersProp[module_id].mod_type=='filtering'){        	
+            	if(query_input){            		
+            		//reset other filters if a new search phrase. This process is triggered based on a component setting
+            		if(customFilters.keyword_search_clear_filters_on_new_search && query_value!=customFilters.previousQueryValue){            			
+        				//find the base url for the search        				
+        				var url=customFiltersProp[module_id].component_base_url;
+        				if(query_value){            				
+            				//url	            				
+            				if(url.indexOf('?')==-1)url+='?';
+            	        	else url+='&';
+            				url+='q='+query_value;
+        				}           			
+            		}  		
+            		//update the search modules if exist
+            		this.updateSearchModules(query_value);            		
+            	}
+        	}        
         	this.loadResults(module_id, url);
         }       
+        
+        //load the filtering module  
+        if (customFiltersProp[module_id].loadModule && !formSubmitBtn) this.loadModule(e, t, module_id, modurl);
+        
         //update filtering modules from other modules. e.g.when the search mod is used
         if (customFiltersProp[module_id].loadOtherFilteringModules) {
-        	query_value='';
+        	query_value=''; 
         	var query_input=document.id('cf-searchmod-input_'+module_id);
         	if(typeof(query_input)!='undefined'){
         		query_value=query_input.value;
+        		if(typeof customFilters.previousQueryValue=='undefined')customFilters.previousQueryValue=query_value;
+        		if(customFilters.keyword_search_clear_filters_on_new_search && query_value!=customFilters.previousQueryValue){     
+	        		modurl=customFiltersProp[module_id].base_url+'index.php?option=com_customfilters&view=module&Itemid='+customFiltersProp[module_id].Itemid;
+	        		if(typeof t.id!='undefined' && t.id=='q_'+module_id+'_clear')query_value='';
+			    	 if(query_value){
+			 			//modurl
+			 			if(modurl.indexOf('?')==-1)modurl+='?';
+			         	else modurl+='&';
+			 			modurl+='q='+query_value;
+			         }
+        		}   
+        		
 	        	var filteringModIds=this.getFilteringModules();
 	        	for(var i=0; i<filteringModIds.length; i++){
 	        		this.updateFilteringModules(filteringModIds[i],query_value);
-	        		this.loadModule(e, t, filteringModIds[i], url);
+	        		this.loadModule(e, t, filteringModIds[i], modurl);
 	        	}
         	}
-        }
-        if (customFiltersProp[module_id].loadModule) this.loadModule(e, t, module_id, url);
+        } 
+        //store the last used keyword search
+	    customFilters.previousQueryValue=query_value;  
     },
     getFilteringModules:function(){
     	var filteringMods=$$('.cf_wrapp_all');
@@ -142,7 +198,8 @@ var customFilters = {
     		searchMods[i].getElement('input[name=q]').value=query_value;
     	}
     },
-    loadModule: function (e, t, module_id, url) {
+
+    loadModule: function (e, t, module_id, url) { 
         var cfForm = document.id("cf_form_" + module_id);
         var s = document.id("cf_wrapp_all_" + module_id);
         var o = document.id("cf_ajax_loader_" + module_id);
@@ -160,9 +217,10 @@ var customFilters = {
             c.setData("tmpl", "component");
             c.setData("format", "raw");
             c.setData("module_id", module_id);
-            var h = (new Request.HTML({
+            var h = (new Request.HTML({ 
                 url: c,
                 noCache:true,
+                
                 onRequest: function () {
                 	//set a spinner
                     if (u == true) {
@@ -190,7 +248,8 @@ var customFilters = {
                     tmpl: "component",
                     format: "raw",
                     module_id: module_id,
-                    Itemid: ""
+                    Itemid: "",
+                    method: "post"
                 },
                 onSend: function () {
                 	//alert(cfForm.toQueryString());

@@ -72,6 +72,8 @@ class CustomfiltersViewCustomfilters extends JViewLegacy{
 
 		if (JFactory::getUser()->authorise('core.edit', 'com_customfilters')){
 			// Add the optimizer button.
+			$icon='health';
+			if(version_compare(JVERSION, '3.0','lt'))$icon='optimize';
 			$height = '550';
 			$width = '875';
 			$top = 0;
@@ -79,7 +81,7 @@ class CustomfiltersViewCustomfilters extends JViewLegacy{
 			$onClose = '';
 			$alt = 'COM_CUSTOMFILTERS_OPTIMIZER';
 			$bar = JToolBar::getInstance('toolbar');
-			$bar->appendButton('Popup', 'optimize', $alt, 'index.php?option=com_customfilters&amp;view=optimizer&amp;tmpl=component', $width, $height, $top, $left, $onClose);
+			$bar->appendButton('Popup', $icon, $alt, 'index.php?option=com_customfilters&amp;view=optimizer&amp;tmpl=component', $width, $height, $top, $left, $onClose);
 		}
 
 			

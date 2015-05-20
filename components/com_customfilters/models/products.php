@@ -79,7 +79,7 @@ class CustomfiltersModelProducts extends VirtueMartModelProduct{
 		$limitstart = $jinput->get('limitstart', 0,'uint');
 
 		//First setup the variables for filtering
-		$filter_order = $jinput->get('orderby',$this->filter_order,'string');
+		$filter_order = $jinput->get('orderby',$this->filter_order,'cmd');
 		//maybe it is missing in older versions
 
 		$this->filter_order_Dir= strtoupper($jinput->get('order', VmConfig::get('prd_brws_orderby_dir', 'ASC'),'cmd'));
@@ -211,7 +211,7 @@ class CustomfiltersModelProducts extends VirtueMartModelProduct{
 			//print_r($productIdsByPrice);
 			if(!empty($productIdsByPrice)){
 				$where_product_ids[]=$productIdsByPrice;
-			}else if(is_array($productIdsByPrice))return;
+			}else if(is_array($productIdsByPrice))return;			
 			if(!empty($profiler))$profiler->mark('After Price Range Search');
 		}
 
@@ -360,6 +360,9 @@ class CustomfiltersModelProducts extends VirtueMartModelProduct{
 				break;
 			case  'created_on':
 				$orderBy = 'p.`created_on`';
+				break;
+			case  'product_mpn':
+				$orderBy = 'p.`product_mpn`';
 				break;
 			default ;
 			if(!empty($filter_order)){
@@ -1002,11 +1005,10 @@ class CustomfiltersModelProducts extends VirtueMartModelProduct{
 			if($join_product_manufacturers)$query->leftJoin('#__virtuemart_manufacturers AS pm ON pp.virtuemart_product_id=pm.virtuemart_product_id');
 
 			//prices per shopper
-			if($prices_per_shopper){
-				if(!class_exists('VirtueMartModelUser')) require(JPATH_VM_ADMINISTRATOR.DIRECTORY_SEPARATOR.'models'.DIRECTORY_SEPARATOR.'user.php');
-				$usermodel = new VirtueMartModelUser;
+			if($prices_per_shopper){				
+				$usermodel = VmModel::getModel ('user');
 				$currentVMuser = $usermodel->getUser();
-				$virtuemart_shoppergroup_ids =  (array)$currentVMuser->shopper_groups;
+				$virtuemart_shoppergroup_ids = cftools::getUserShopperGroups(); 
 				if($currentVMuser->virtuemart_user_id>0){
 					JArrayHelper::toInteger($virtuemart_shoppergroup_ids);
 					if(!empty($virtuemart_shoppergroup_ids)  && is_array($virtuemart_shoppergroup_ids))
@@ -1227,14 +1229,14 @@ class CustomfiltersModelProducts extends VirtueMartModelProduct{
 		/*store only the necessary variables
 		 because the query maybe is a query of another component with unwanted vars*/
 		$final_array=array();
+		$inputs=cftools::encodeInput($this->cfinputs);
 
 		$final_array['option']='com_customfilters';
 		$final_array['view']='products';
-		if(isset($this->cfinputs['q'])) $final_array['q']=$this->cfinputs['q'];
-		if(isset($this->cfinputs['virtuemart_category_id'])) $final_array['virtuemart_category_id']=$this->cfinputs['virtuemart_category_id'];
-		if(isset($this->cfinputs['virtuemart_manufacturer_id'])) $final_array['virtuemart_manufacturer_id']=$this->cfinputs['virtuemart_manufacturer_id'];
-		if(isset($this->cfinputs['price'][0])) $final_array['price_from']=$this->cfinputs['price'][0];
-		if(isset($this->cfinputs['price'][1])) $final_array['price_to']=$this->cfinputs['price'][1];
+		if(isset($inputs['q'])) $final_array['q']=$inputs['q'];
+		if(isset($inputs['virtuemart_category_id'])) $final_array['virtuemart_category_id']=$inputs['virtuemart_category_id'];
+		if(isset($inputs['virtuemart_manufacturer_id'])) $final_array['virtuemart_manufacturer_id']=$inputs['virtuemart_manufacturer_id'];
+		if(isset($inputs['price'])) $final_array['price']=$inputs['price'];		
 		if(isset($Itemid)) $final_array['Itemid']=(int)$Itemid;
 		//custom filters
 		$cust_flt=$this->published_cf;
@@ -1243,7 +1245,7 @@ class CustomfiltersModelProducts extends VirtueMartModelProduct{
 		if(!empty($cust_flt)){
 			foreach($cust_flt as $cf) {
 				$var_name='custom_f_'.$cf->custom_id;
-				if(isset($this->cfinputs[$var_name])) $final_array[$var_name]=$this->cfinputs[$var_name];
+				if(isset($inputs[$var_name])) $final_array[$var_name]=$inputs[$var_name];
 			}
 		}
 

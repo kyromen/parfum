@@ -88,21 +88,27 @@ class ModCfFilteringHelper{
 	 */
 	public function getFilters($params, $module){
 		$this->module=$module;
-		$this->results_trigger=$params->get('results_trigger','sel');
-		$this->results_loading_mode=$params->get('results_loading_mode','ajax');
+		$this->component_params  = cftools::getComponentparams();
+		$this->menu_params=cftools::getMenuparams();
 		$japplication=JFactory::getApplication();
 		$jinput=$japplication->input;
 		$doc= JFactory::getDocument();
+		$Itemid=$this->menu_params->get('cf_itemid','');
+		
+		$this->results_trigger=$params->get('results_trigger','sel');
+		$this->results_loading_mode=$params->get('results_loading_mode','ajax');		
 		$this->direction=$doc->getDirection();
-		$this->scriptVars['base_url']=JURI::base();
+		$this->scriptVars['base_url']=JURI::base();		
+		$this->scriptVars['Itemid']=$Itemid;
+		$this->scriptVars['component_base_url']=JRoute::_('index.php?option=com_customfilters&view=products&Itemid='.$Itemid);
+		$this->scriptProcesses[]='customFilters.keyword_search_clear_filters_on_new_search='.$this->component_params->get('keyword_search_clear_filters_on_new_search',true).'; ';
 		$this->scriptVars['cf_direction']=$this->direction;
 		$this->scriptVars['results_trigger']=$this->results_trigger;
 		$this->scriptVars['results_wrapper']=$params->get('results_wrapper','bd_results');
 		if($this->results_loading_mode=='ajax' || $this->results_trigger=='btn')$loadAjaxModule=true;
 		else $loadAjaxModule=false;
 		$this->scriptVars['loadModule']=$loadAjaxModule;
-		$this->component_params  = cftools::getComponentparams();
-		$this->menu_params=cftools::getMenuparams();
+		
 
 		$dependency_dir=$params->get('dependency_direction','all');
 
@@ -122,7 +128,7 @@ class ModCfFilteringHelper{
 		//the helper that contains the logic for retreiving the filters' options
 		$this->optHelper=new ModCfilteringOptions($params,$module);
 		//check the state of languagefilter plugin.If its active we should join the products language table to find the active options
-		$plugin = JPluginHelper::getPlugin('system', 'languagefilter');
+		$plugin =& JPluginHelper::getPlugin('system', 'languagefilter');
 		if(!empty($plugin))$this->optHelper->setLanguageSwitch(true);
 		//reset options
 		$display_reset_all=$params->get('disp_reset_all',1);
@@ -340,13 +346,13 @@ class ModCfFilteringHelper{
 							$price_flt['options']=array();
 
 							//from
-							$price_flt['options'][0]['name']='price_from';
+							$price_flt['options'][0]['name']='price[0]';
 							$price_flt['options'][0]['label']='';
 							$price_flt['options'][0]['size']=$cf_price_size;
 							$price_flt['options'][0]['maxlength']=$cf_price_maxlength;
 							$price_flt['options'][0]['slider_min_value']=$min_range;
 							//to
-							$price_flt['options'][1]['name']='price_to';
+							$price_flt['options'][1]['name']='price[1]';
 							$price_flt['options'][1]['label']=JText::_('MOD_CF_RANGE_TO');
 							$price_flt['options'][1]['size']=$cf_price_size;
 							$price_flt['options'][1]['maxlength']=$cf_price_maxlength;
@@ -405,13 +411,13 @@ class ModCfFilteringHelper{
 								$cf_range['options']=array();
 								//from
 								$cf_range['options'][0]['size']=$cf_range_size;
-								$cf_range['options'][0]['name']=$var_name.'_from';
+								$cf_range['options'][0]['name']=$var_name.'[0]';
 								$cf_range['options'][0]['maxlength']=$cf_range_maxlength;
 								$cf_range['options'][0]['slider_min_value']=$cfparams->get('slider_min_value',0);
 
 								//to
 								$cf_range['options'][1]['size']=$cf_range_size;
-								$cf_range['options'][1]['name']=$var_name.'_to';
+								$cf_range['options'][1]['name']=$var_name.'[1]';
 								$cf_range['options'][1]['label']=JText::_('MOD_CF_RANGE_TO');
 								$cf_range['options'][1]['maxlength']=$cf_range_maxlength;
 								$cf_range['options'][1]['slider_max_value']=$slider_max_value=$cfparams->get('slider_max_value',300);

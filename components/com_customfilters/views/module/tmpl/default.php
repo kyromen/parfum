@@ -19,7 +19,7 @@
 // no direct access
 defined('_JEXEC') or die;
 require_once JPATH_COMPONENT.DS.'include'.DS.'cfmoduleHelper.php';
-$document = JFactory::getDocument();
+$document =& JFactory::getDocument();
 $document->setMimeEncoding( 'text/html' );
 $jinput=JFactory::getApplication()->input;
 $module_id=$jinput->get('module_id','','int');

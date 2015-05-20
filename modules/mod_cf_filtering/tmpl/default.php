@@ -31,7 +31,7 @@ $document->addStyleSheet(JURI::root().'modules/mod_cf_filtering/assets/style.css
 
 
 /*CSS for RTL sites in  webkit browser*/
-$browser = JBrowser::getInstance();
+$browser = &JBrowser::getInstance();
 $browserType = $browser->getBrowser();
 if(($browserType=='chrome' || $browserType=='safari') &&  $direction=='rtl'){
 	$style='.knob_wrapper {margin-left:18px;}';
@@ -133,7 +133,8 @@ if(count($filters_html_array)>0){
 		endif;
 				
 		//in case of button add some extra vars to the form
-		if($results_trigger=='btn'):?>	
+		if($results_trigger=='btn'):?>
+		<br/>	
 		<input type="submit" class="cf_apply_button btn btn-primary"  id="cf_apply_button_<?php echo $module->id?>" value="<?php echo JText::_('MOD_CF_APPLY');?>"/>
 		<?php 
 		endif;

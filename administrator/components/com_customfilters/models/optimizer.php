@@ -5,14 +5,14 @@
  * @package 	customfilters
  * @author		Sakis Terz
  * @link		http://breakdesigns.net
- * @copyright	Copyright (c) 2010 - 2014 breakdesigns.net. All rights reserved.
+ * @copyright	Copyright (c) 2012 - 2015 breakdesigns.net. All rights reserved.
  * @license		http://www.gnu.org/copyleft/gpl.html GNU/GPL, see LICENSE.php
  *				customfilters is free software. This version may have been modified
  *				pursuant to the GNU General Public License, and as distributed
  *				it includes or is derivative of works licensed under the GNU
  *				General Public License or other free or open source software
  *				licenses.
- * @version 	$Id: optimizer.php  2014-03-06 19:09:00Z sakis $
+ * @version 	$Id: optimizer.php  2015-03-04 14:34:00Z sakis $
  * @since		1.9.5
  */
 
@@ -51,7 +51,7 @@ class CustomfiltersModelOptimizer extends JModelForm{
 		/**
 		 * Method to get the record form located in models/forms
 		 *
-		 * @copyright
+		 * 
 		 * @author 		Sakis Terx
 		 * @todo
 		 * @see
@@ -101,6 +101,7 @@ class CustomfiltersModelOptimizer extends JModelForm{
 		/**
 		 *
 		 * Main function that runs the optimization queries for the database
+		 * 
 		 * @since 	1.9.5
 		 * @author 	Sakis Terz
 		 */
@@ -110,14 +111,22 @@ class CustomfiltersModelOptimizer extends JModelForm{
 			$indexes=array();
 			$tables=array_keys($this->indexes);
 			$indexNames=array();
+			$existing_tables=array();
 
 			//get the existing indexes
 			foreach ($tables as $tbl){
-				$query='SHOW INDEX FROM '.$tbl.' WHERE `Key_name`!="PRIMARY"';
-				$db->setQuery($query);
-				if($db->query()){
+				
+				try{
+					$query='SHOW INDEX FROM '.$tbl.' WHERE `Key_name`!="PRIMARY"';
+					$db->setQuery($query);
+					$db->query();
 					$indexes[$tbl]=$db->loadObjectList();
+					$existing_tables[]=$tbl;
 				}
+				//possibly the table does not exist or something goes wrong
+				catch(Exception $e){
+					unset($this->indexes[$tbl]);
+				}				
 			}
 			$this->oldIndexes=$indexes;
 

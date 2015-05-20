@@ -104,7 +104,7 @@ class ModCfilteringRender{
 		$thereIsSelection=!empty($this->selected_flt);
 
 		foreach($this->filters as $key=>$flt){
-			
+
 			$display_key=$key.'_'.$this->module->id;
 			$is_customfield=strpos($key, 'custom_f_');
 			//used to fetch params from specific filters
@@ -324,7 +324,7 @@ class ModCfilteringRender{
 								//in case of categories, parent categories with childs cannot be radios or checkboxes (only links)
 								if(($disp_type==2 || $disp_type==3) && empty($opt->isparent)){
 									$type_str=($disp_type==2?'radio':'checkbox');
-									
+
 
 									//when checkboxes, hide the checkbox from the clear tool
 									if($opt->type=='clear' && $type_str=='checkbox')$disp_input=false;
@@ -488,18 +488,18 @@ class ModCfilteringRender{
 							$html.='<div class="cf_wrapper_input_text '.$input_class.'" id="cf_wrapper_input_text_'.$display_key.'">';
 							$html.='<div class="form-horizontal">';
 							$html.=$innerHTML;
-							if(!$sliderExist){
-								$html.='
-								<button type="submit" class="cf_search_button btn" id="'.$display_key.'_button'.'">
-								<i class="cficon-search"></i>
-								</button>';
-								$html.=$innerHTML_clear;
-								//assigne event to the button
-								$this->scriptProcesses[]="customFilters.assignEvents(".$this->module->id.");";
-							}
+
+							$html.='
+							<button type="submit" class="cf_search_button btn" id="'.$display_key.'_button'.'">
+							<i class="cficon-search"></i>
+							</button>';
+							$html.=$innerHTML_clear;
+							//assigne event to the button
+							$this->scriptProcesses[]="customFilters.assignEvents(".$this->module->id.");";
+
 							$html.='</div>';
 							$html.='<div class="cf_message" id="'.$display_key.'_message"></div>';
-							$html.='<input type="hidden" value="'.$clear_targ.'" id="'.$display_key.'_url'.'"/>';							
+							$html.='<input type="hidden" value="'.$clear_targ.'" id="'.$display_key.'_url'.'"/>';
 							$html.='</div>';
 						}
 					}
@@ -528,7 +528,7 @@ class ModCfilteringRender{
 						$innerHTML.=
 						JHTML::calendar(
 						$val_from,
-						$key.'_from',
+						$key.'[0]',
 						$display_key.'_0',
 						$format,
 						array('size'=>$size,'maxlength'=>$maxlength)
@@ -539,7 +539,7 @@ class ModCfilteringRender{
 						$innerHTML.=
 						JHTML::calendar(
 						$val_to,
-						$key.'_to',
+						$key.'[1]',
 						$display_key.'_1',
 						$format,
 						array('size'=>$size,'maxlength'=>$maxlength)
@@ -590,7 +590,7 @@ class ModCfilteringRender{
 						$knobInnerHTML.='<div class="cf_filtering_knob cf_filtering_knob_from" id="'.$display_key.'_knob_from" rel="'.$val_from.'"></div>';
 						if($inputTextExist){//an input text exist which stores the slider values
 						}else{
-							$innerHTML.='<input name="'.$key.'_from" value="'.$val_from.'" type="hidden" id="'.$display_key.'_0">';
+							$innerHTML.='<input name="'.$key.'[0]" value="'.$val_from.'" type="hidden" id="'.$display_key.'_0">';
 						}
 
 						//to
@@ -599,7 +599,7 @@ class ModCfilteringRender{
 						$knobInnerHTML.='<div class="cf_filtering_knob cf_filtering_knob_to" id="'.$display_key.'_knob_to" rel="'.$val_to.'"></div>';
 						if($inputTextExist){//an input text exist which stores the slider values
 						}else{
-							$innerHTML.='<input  name="'.$key.'_to" value="'.$val_to.'" type="hidden" id="'.$display_key.'_1">';
+							$innerHTML.='<input  name="'.$key.'[1]" value="'.$val_to.'" type="hidden" id="'.$display_key.'_1">';
 						}
 
 						if(($val_from || $val_to)){//generate the clear link
@@ -609,7 +609,7 @@ class ModCfilteringRender{
 						if(!empty($knobInnerHTML)){
 							$innerHTML.='<div class="knob_wrapper">'.$knobInnerHTML.'</div>';
 						}
-												
+
 						if($innerHTML){
 							$this->setSliderScripts($key,$inputTextExist,$slider_min_value,$slider_max_value);
 
@@ -628,14 +628,15 @@ class ModCfilteringRender{
 							if(!$inputTextExist){
 								$html.='<div class="cf_message" id="'.$display_key.'_message"></div>';
 								$html.='<input type="hidden" value="'.$clear_targ.'" id="'.$display_key.'_url'.'"/>';
-							}
-							if($this->results_trigger!='btn' && $this->results_loading_mode!='ajax'){
-								$html.='
-								<button type="submit" class="cf_search_button btn" id="'.$display_key.'_button'.'">
-								<i class="cficon-search"></i>
-								</button>';
-								//assign also event to the button
-								$this->scriptProcesses[]="customFilters.assignEvents(".$this->module->id.");";
+									
+								if($this->results_trigger!='btn' && $this->results_loading_mode!='ajax'){
+									$html.='
+									<button type="submit" class="cf_search_button btn" id="'.$display_key.'_button'.'">
+									<i class="cficon-search"></i>
+									</button>';
+									//assign also event to the button
+									$this->scriptProcesses[]="customFilters.assignEvents(".$this->module->id.");";
+								}
 							}
 							if(!empty($innerHTML_clear))$html.=$innerHTML_clear;
 							//$html.=$innerHTML_clear;
@@ -665,7 +666,7 @@ class ModCfilteringRender{
 		$var_name=$filter['var_name'];
 		$display_type=$filter['display'];
 		$on_category_reset_others=false;
-		
+
 
 		if($var_name=='virtuemart_category_id'){
 			$on_category_reset_others=$this->moduleparams->get('category_flt_onchange_reset','filters');
@@ -686,8 +687,8 @@ class ModCfilteringRender{
 			$q_array['virtuemart_category_id']=$categ_array;
 			if($on_category_reset_others=='filters')!empty($this->selected_flt['q'])?$q_array['q']=$this->selected_flt['q']:'';
 		}
-		else $q_array=$this->selected_flt_modif;		
-		
+		else $q_array=$this->selected_flt_modif;
+
 
 		//in case of category tree, the parent options are always links, no matter what is the display type of the filter
 		if(!empty($this->filters[$var_name]['options'][$var_value]->isparent))$display_type=4;
@@ -714,7 +715,7 @@ class ModCfilteringRender{
 		 * The destination link of that option should omit it's value in case of checkboxes or multi-button
 		 * to create the uncheck effect
 		 */
-		if(($display_type==3 || $display_type==10 || $display_type==12)&& (isset($q_array[$var_name]) && in_array($var_value, $q_array[$var_name]))){ 
+		if(($display_type==3 || $display_type==10 || $display_type==12)&& (isset($q_array[$var_name]) && in_array($var_value, $q_array[$var_name]))){
 			if(is_array($q_array[$var_name])) {
 				$key=array_search($var_value,$q_array[$var_name]);
 				unset($q_array[$var_name][$key]);
@@ -760,9 +761,6 @@ class ModCfilteringRender{
 				}
 			}
 		}
-		//set the ranges to the query
-		$q_array=$this->setRangesToQuery($q_array);
-
 		$itemId=$this->menu_params->get('cf_itemid','');
 		if($itemId)$q_array['Itemid']=$itemId;
 		$q_array['option']='com_customfilters';
@@ -784,7 +782,7 @@ class ModCfilteringRender{
 	}
 
 
-	
+
 	/**
 	 * Unset any custom filter found from the assoc array
 	 * @param 	Array	An array tha conains the vars of the query
@@ -802,23 +800,6 @@ class ModCfilteringRender{
 		}
 	}
 
-	/**
-	 * Set the ranges to the url's query
-	 *
-	 * @param 	array	queries
-	 * @since	1.6.1
-	 */
-	private function setRangesToQuery($q_array){
-		$rangeVars=cftools::getRangeVars();
-		foreach($q_array as $key=>$ar){
-			if(in_array($key, $rangeVars)){
-				if(isset($ar[0]))$q_array[$key.'_from']=$ar[0];
-				if(isset($ar[1]))$q_array[$key.'_to']=$ar[1];
-				unset($q_array[$key]);
-			}
-		}
-		return $q_array;
-	}
 
 	/**
 	 *

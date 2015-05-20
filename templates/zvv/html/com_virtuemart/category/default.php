@@ -71,12 +71,6 @@ if ( strstr ( JURI::current(), "/manufacturer/" ) ) {
 					<div class="manuf-img"><img src="<?php echo getVmMediaFile($virtuemart_media_id);?>" \></div>
 				<?php } ?>
 			<?php } ?>
-
-			<?php if ( !empty($manufacturer->mf_desc) ) { ?>
-				<div class="manuf-desc">
-					<p><?php echo $manufacturer->mf_desc; ?></p>
-				</div>
-			<?php } ?>
 		</div>
 	<?php } else { ?>
 		<div style="padding: 10px;"></div>
@@ -277,6 +271,17 @@ if ( strstr ( JURI::current(), "/manufacturer/" ) ) {
 		</div>
 
 	<?php } ?>
+
+	<?php if ($manufacturer->mf_name) { ?>
+                <div class="manufacturer-block">
+                <?php if ( !empty($manufacturer->mf_desc) ) { ?>
+                	<div class="manuf-desc">
+                        	<p><?php echo $manufacturer->mf_desc; ?></p>
+                        </div>
+                <?php } ?>
+                </div>
+        <?php } ?>
+
 	<?php
 //	elseif (!empty($this->keyword)) {
 //		echo JText::_ ('COM_VIRTUEMART_NO_RESULT') . ($this->keyword ? ' : (' . $this->keyword . ')' : '');
