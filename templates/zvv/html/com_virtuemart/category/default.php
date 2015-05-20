@@ -109,7 +109,12 @@ if ($menu->getActive()->id != 149) {
 						if ($manufacturer->mf_name == $brand->mf_name) $li_class=" class=\"current\"";
 						else $li_class = "";
 
-						$manufacturerIncludedProductsURL = JRoute::_('index.php?option=com_virtuemart&view=category&virtuemart_manufacturer_id=' . $brand->virtuemart_manufacturer_id . "&virtuemart_category_id=" . $this->category->virtuemart_category_id, FALSE);
+						if ($this->category->virtuemart_category_id == 0) {
+							$manufacturerIncludedProductsURL = JRoute::_('index.php?option=com_virtuemart&view=category&virtuemart_manufacturer_id=' . $brand->virtuemart_manufacturer_id, FALSE);
+						} else {
+							$manufacturerIncludedProductsURL = JRoute::_('index.php?option=com_virtuemart&view=category&virtuemart_manufacturer_id=' . $brand->virtuemart_manufacturer_id . "&virtuemart_category_id=" . $this->category->virtuemart_category_id, FALSE);
+						}
+
 						?>
 						<li<?php echo $li_class; ?>><a title="<?php echo $brand->mf_name; ?>" href="<?php echo $manufacturerIncludedProductsURL; ?>"><?php echo $brand->mf_name; ?></a></li>
 					<?php } ?>
@@ -211,7 +216,7 @@ if ($menu->getActive()->id != 149) {
 						<div class="category floatleft<?php echo $category_cellwidth . $show_vertical_separator ?>" style="width: <?php echo 100 / count($category_with_products); ?>%">
 							<div class="spacer">
 								<h2>
-									<a href="<?php if ( !($class) ) echo $caturl; else echo "#"; ?>" title="<?php echo $category->category_name ?>" <?php echo $class; ?>>
+									<a href="<?php echo $caturl; ?>" title="<?php echo $category->category_name ?>" <?php echo $class; ?>>
 										<?php echo $category->category_name ?>
 									</a>
 								</h2>
