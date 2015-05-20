@@ -48,243 +48,221 @@ $document->addScriptDeclaration ($js);
 
 $manuM = VmModel::getModel('manufacturer');
 $mlang=(!VmConfig::get('prodOnlyWLang',false) and VmConfig::$defaultLang!=VmConfig::$vmlang and Vmconfig::$langCount>1);
+$manufacturers = $manuM ->getManufacturersOfProductsInCategory($this->category->virtuemart_category_id,VmConfig::$vmlang,$mlang);
+
+if ( strstr ( JURI::current(), "/brand/" ) ) $manufacturer = $manuM->getManufacturer();
+
+$app = JFactory::getApplication();
+$menu = $app->getMenu();
+$current_page = $menu->getActive()->id;
 
 //$categgories = $manuMC->getManufacturerCategories(true);
 
-if (empty($this->keyword) and !empty($this->category)) {
-	?>
+if (empty($this->keyword) and !empty($this->category)) { ?>
 	<div class="category_description">
 		<?php echo $this->category->category_description; ?>
 	</div>
 <?php
 }
 
-if ( strstr ( JURI::current(), "/manufacturer/" ) ) {
-	$model = VmModel::getModel('manufacturer');
-	$manufacturer = $model->getManufacturer();
-	?>
-	<?php if ($manufacturer->mf_name) { ?>
-		<div class="manufacturer-block">
-			<div class="manuf-header">Парфюмерия <?php echo $manufacturer->mf_name;?></div>
-			<?php if (isset($manufacturer->virtuemart_media_id[0])) {
-				foreach ($manufacturer->virtuemart_media_id as $virtuemart_media_id) { ?>
-					<div class="manuf-img"><img src="<?php echo getVmMediaFile($virtuemart_media_id);?>" \></div>
+if ($menu->getActive()->id != 149) {
+	if (VmConfig::get ('showCategory', 1) or empty($this->keyword)) { ?>
+		<div class="category-block-left">
+			<?php
+			if (!empty($manufacturers)) {
+				echo "<div class=\"category-manufacturers\">";
+				echo "<span>Бренды</span>";
+				echo "<ul class=\"mCustomScrollbar\">";
+				$indexes = array();
+				$brands = array();
+				$block = $manufacturers[0]->mf_name[0];
+
+				if ( isset($_GET['index']) ) {
+					$index = $block = $_GET['index'];
+				}
+
+				$i = 0;
+				$j = 0;
+				foreach ( $manufacturers as $manuf ) {
+					if ( isset($index) ) {
+						if ($index != $manuf->mf_name[0]) continue;
+					}
+					if ($block != $manuf->mf_name[0]) {
+						$indexes[$i] = $brands;
+						$brands = array();
+						$block = $manuf->mf_name[0];
+						$i += 1;
+						$j = 0;
+						$brands[$j] = $manuf;
+					} else {
+						$brands[$j] = $manuf;
+						$j += 1;
+					}
+				}
+				$indexes[$i] = $brands;
+				for ($i=0; isset($indexes[$i]); $i+=1) {
+					$brands = $indexes[$i];
+
+					if (!isset($brands[0]->mf_name[0])) { continue; }
+
+					foreach ( $brands as $brand ) {
+						if ($manufacturer->mf_name == $brand->mf_name) $li_class=" class=\"current\"";
+						else $li_class = "";
+
+						$manufacturerIncludedProductsURL = JRoute::_('index.php?option=com_virtuemart&view=category&virtuemart_manufacturer_id=' . $brand->virtuemart_manufacturer_id . "&virtuemart_category_id=" . $this->category->virtuemart_category_id, FALSE);
+						?>
+						<li<?php echo $li_class; ?>><a title="<?php echo $brand->mf_name; ?>" href="<?php echo $manufacturerIncludedProductsURL; ?>"><?php echo $brand->mf_name; ?></a></li>
+					<?php } ?>
 				<?php } ?>
+				</ul>
+				</div>
+				<div class="clear"></div>
 			<?php } ?>
 		</div>
-	<?php } else { ?>
-		<div style="padding: 10px;"></div>
-	<?php } ?>
-	<?php
-	$manufacturers = $manuM ->getManufacturersOfProductsInCategory($this->category->virtuemart_category_id,VmConfig::$vmlang,$mlang);
-	$indexes = array();
-	$brands = array();
-	$block = $manufacturers[0]->mf_name[0];
 
-	$i = 0;
-	$j = 0;
-	foreach ( $manufacturers as $manuf ) {
-        if ( isset($index) ) {
-            if ($index != $manuf->mf_name[0]) continue;
-        }
-        if ($block != $manuf->mf_name[0]) {
-            $indexes[$i] = $brands;
-            $brands = array();
-            $block = $manuf->mf_name[0];
-            $i += 1;
-            $j = 0;
-            $brands[$j] = $manuf;
-        } else {
-            $brands[$j] = $manuf;
-            $j += 1;
-        }
-	}
-	$indexes[$i] = $brands;
+		<div class="category-block-right">
+			<?php
+			if ( strstr ( JURI::current(), "/brand/" ) ) {
+				?>
+				<?php if ($manufacturer->mf_name) { ?>
+					<div class="manufacturer-block">
+						<div class="manuf-header">Парфюмерия <?php echo $manufacturer->mf_name;?></div>
+						<?php if (isset($manufacturer->virtuemart_media_id[0])) {
+							foreach ($manufacturer->virtuemart_media_id as $virtuemart_media_id) { ?>
+								<div class="manuf-img"><img src="<?php echo getVmMediaFile($virtuemart_media_id);?>" \></div>
+							<?php } ?>
+						<?php } ?>
+					</div>
+				<?php } else { ?>
+					<div style="padding: 10px;"></div>
+				<?php } ?>
+			<?php } ?>
 
-	if (empty($this->category->haschildren)) {
-		$model = VmModel::getModel('category');
-		$category_parent_id = $model->getParentCategory($this->category->virtuemart_category_id);
-		//	$output = $model->getCategories(true, false, $my_id->virtuemart_category_id);
-		$output = $model->getChildCategoryList($category_parent_id->virtuemart_vendor_id, $category_parent_id->virtuemart_category_id);
-		$categories = $output;
-	} else {
-		$categories = $this->category->children;
-	}
+			<?php
+			if (empty($this->category->haschildren)) {
+				$model = VmModel::getModel('category');
+				$category_parent_id = $model->getParentCategory($this->category->virtuemart_category_id);
+				$output = $model->getChildCategoryList($category_parent_id->virtuemart_vendor_id, $category_parent_id->virtuemart_category_id);
+				$categories = $output;
+			} else {
+				$categories = $this->category->children;
+			}
 
-		if (!empty($categories)) {
+			if (!empty($categories)) {
+				$iCol = 1;
+				$iCategory = 1;
 
-		// Category and Columns Counter
-		$iCol = 1;
-		$iCategory = 1;
+				$categories_per_row = count($categories);
+				$category_cellwidth = ' width' . floor (100 / $categories_per_row);
 
-		// Calculating Categories Per Row
-		//		$categories_per_row = VmConfig::get ('categories_per_row', 3);
-		$categories_per_row = count($categories);
-		$category_cellwidth = ' width' . floor (100 / $categories_per_row);
+				$verticalseparator = " vertical-separator";
+				?>
 
-		// Separator
-		$verticalseparator = " vertical-separator";
-		?>
+				<div class="child-category-view">
+					<?php
+					$i = 0;
+					$category_with_products = array();
+					foreach ($categories as $category) {
+						$manufacturers = $manuM->getManufacturersOfProductsInCategory($category->virtuemart_category_id, VmConfig::$vmlang, $mlang);
 
-		<div class="child-category-view">
-
-		<?php // Start the Output
-		$i = 0;
-		$category_with_products = array();
-		foreach ($categories as $category) {
-			$manufacturers = $manuM->getManufacturersOfProductsInCategory($category->virtuemart_category_id, VmConfig::$vmlang, $mlang);
-
-			$whithout_products = true;
-			foreach ($manufacturers as $manuf) {
-				if ( isset($manufacturer->virtuemart_manufacturer_id) ) {
-					if ($manuf->virtuemart_manufacturer_id == $manufacturer->virtuemart_manufacturer_id) {
-						$whithout_products = false;
-						break;
-					}
-				} else {
-					foreach ($indexes as $index) {
-						foreach ($index as $cat_manufacturer) {
-							if ($manuf->virtuemart_manufacturer_id == $cat_manufacturer->virtuemart_manufacturer_id) {
+						$whithout_products = true;
+						foreach ($manufacturers as $manuf) {
+							if ( isset($manufacturer->virtuemart_manufacturer_id) ) {
+								if ($manuf->virtuemart_manufacturer_id == $manufacturer->virtuemart_manufacturer_id) {
+									$whithout_products = false;
+									break;
+								}
+							} else {
 								$whithout_products = false;
 								break;
 							}
 						}
+						if ($whithout_products) continue;
+
+						$category_with_products[$i] = $category;
+						$i++;
 					}
-				}
-			}
-			if ($whithout_products) continue;
 
+					foreach ($category_with_products as $category) {
+						if ($iCol == 1) { ?>
+							<div class="row">
+						<?php } ?>
 
-			$category_with_products[$i] = $category;
-			$i++;
-		} ?>
+						<?php
+						if (isset($_GET['index'])) {
+							$caturl = JRoute::_('index.php?option=com_virtuemart&view=category&virtuemart_category_id=' . $category->virtuemart_category_id . '&index=' . $_GET['index'], FALSE);
+						} else if (strstr(JURI::current(), "/brand/")) {
+							$caturl = JRoute::_('index.php?option=com_virtuemart&view=category&virtuemart_manufacturer_id=' . $manufacturer->virtuemart_manufacturer_id . "&virtuemart_category_id=" . $category->virtuemart_category_id, FALSE);
+						} else {
+							$caturl = JRoute::_('index.php?option=com_virtuemart&view=category&virtuemart_category_id=' . $category->virtuemart_category_id, FALSE);
+						}
 
-		<div class="row">
-		<?php foreach ($category_with_products as $category) { ?>
+						if ($iCategory == $categories_per_row or $iCategory % $categories_per_row == 0) {
+							$show_vertical_separator = ' ';
+						} else {
+							$show_vertical_separator = $verticalseparator;
+						}
 
+						$class = 0;
+						if (($category->virtuemart_category_id == $this->category->virtuemart_category_id) or (count($category_with_products) == 1)) {
+							$class = "class='active'";
+						} ?>
 
+						<div class="category floatleft<?php echo $category_cellwidth . $show_vertical_separator ?>" style="width: <?php echo 100 / count($category_with_products); ?>%">
+							<div class="spacer">
+								<h2>
+									<a href="<?php if ( !($class) ) echo $caturl; else echo "#"; ?>" title="<?php echo $category->category_name ?>" <?php echo $class; ?>>
+										<?php echo $category->category_name ?>
+									</a>
+								</h2>
+							</div>
+						</div>
+
+						<?php
+						$iCategory++;
+						if ($iCol == $categories_per_row) { ?>
+							<div class="clear"></div>
+							</div>
+
+							<?php
+							$iCol = 1;
+						} else {
+							$iCol++;
+						}
+					}
+
+					if ($iCol != 1) { ?>
+						<div class="clear"></div>
+						</div>
+					<?php } ?>
+			<?php } ?>
+		</div>
+
+		<div id="products-block" class="browse-view">
+			<?php
+			if (!empty($this->keyword)) { ?>
+				<h3><?php echo $this->keyword; ?></h3>
+			<?php } ?>
 
 			<?php
+			if (!empty($this->products)) {
+				$products = array();
+				$products[0] = $this->products;
+				echo shopFunctionsF::renderVmSubLayout($this->productsLayout, array('products' => $products, 'currency' => $this->currency, 'products_per_row' => $this->perRow, 'showRating' => $this->showRating));
+				?>
 
-			// Category Link
-			if (isset($_GET['index'])) {
-				$caturl = JRoute::_('index.php?option=com_virtuemart&view=category&virtuemart_category_id=' . $category->virtuemart_category_id . '&index=' . $_GET['index'], FALSE);
-			} else if (strstr(JURI::current(), "/manufacturer/")) {
-				$caturl = JRoute::_('index.php?option=com_virtuemart&view=category&virtuemart_manufacturer_id=' . $manufacturer->virtuemart_manufacturer_id . "&virtuemart_category_id=" . $category->virtuemart_category_id, FALSE);
-			} else {
-				$caturl = JRoute::_('index.php?option=com_virtuemart&view=category&virtuemart_category_id=' . $category->virtuemart_category_id, FALSE);
-			}
-
-			// Show the vertical seperator
-			if ($iCategory == $categories_per_row or $iCategory % $categories_per_row == 0) {
-				$show_vertical_separator = ' ';
-			} else {
-				$show_vertical_separator = $verticalseparator;
-			}
-
-			$class = 0;
-			if ($category->virtuemart_category_id == $this->category->virtuemart_category_id) {
-				$class = "class='active'";
-			}
-			// Show Category
-			?>
-			<div class="category floatleft<?php echo $category_cellwidth . $show_vertical_separator ?>" style="width: <?php echo 100 / count($category_with_products); ?>%">
-				<div class="spacer">
-					<h2>
-						<a href="<?php echo $caturl ?>" title="<?php echo $category->category_name ?>" <?php echo $class; ?>>
-							<?php echo $category->category_name ?>
-							<!--								<br/>-->
-							<?php // if ($category->ids) {
-							//								echo $category->images[0]->displayMediaThumb ("", FALSE);
-							//} ?>
-							<img src="/images/triangle.png" \>
-						</a>
-					</h2>
+				<div class="vm-pagination" style="margin-top: 40px;"><?php echo $this->vmPagination->getPagesLinks(); ?>
+					<span style="float:right">
 				</div>
-			</div>
-		<?php } ?>
-			<div class="clear"></div>
-		</div>
-		<div class="clear"></div>
-	</div>
-	<?php } ?>
-<?php } ?>
-
-<div id="products-block" class="browse-view">
-	<?php
-
-	if (!empty($this->keyword)) {
-		?>
-		<h3><?php echo $this->keyword; ?></h3>
-	<?php
-	} ?>
-<!--	--><?php //if (!empty($this->keyword)) {
-//
-//		$category_id  = JRequest::getInt ('virtuemart_category_id', 0); ?>
-<!--		<form action="--><?php //echo JRoute::_ ('index.php?option=com_virtuemart&view=category&limitstart=0', FALSE); ?><!--" method="get">-->
-<!---->
-<!--			<!--BEGIN Search Box -->
-<!--			<div class="virtuemart_search">-->
-<!--				--><?php //echo $this->searchcustom ?>
-<!--				<br/>-->
-<!--				--><?php //if (isset($this->searchcustomvalues)) { echo $this->searchcustomvalues; } ?>
-<!--				<input name="keyword" class="inputbox" type="text" size="20" value="--><?php //echo $this->keyword ?><!--"/>-->
-<!--				<input type="submit" value="--><?php //echo JText::_ ('COM_VIRTUEMART_SEARCH') ?><!--" class="button" onclick="this.form.keyword.focus();"/>-->
-<!--			</div>-->
-<!--			<input type="hidden" name="search" value="true"/>-->
-<!--			<input type="hidden" name="view" value="category"/>-->
-<!--			<input type="hidden" name="option" value="com_virtuemart"/>-->
-<!--			<input type="hidden" name="virtuemart_category_id" value="--><?php //echo $category_id; ?><!--"/>-->
-<!---->
-<!--		</form>-->
-<!--		<!-- End Search Box -->
-<!--	--><?php //} ?>
-
-<!--	<div class="orderby-displaynumber">-->
-<!--		<div class="floatleft">-->
-<!--			--><?php //echo $this->orderByList['orderby']; ?>
-<!--			--><?php //echo $this->orderByList['manufacturer']; ?>
-<!--		</div>-->
-		<!--    <div class="vm-pagination floatright">-->
-		<!--        --><?php
-		//            echo $this->vmPagination->getPagesLinks ();
-		//        ?>
-		<!--        <!--            <span style="float:right">--><?php ////echo $this->vmPagination->getPagesCounter (); ?><!--<!--</span>-->
-		<!--    </div>-->
-
-		<!--    <div class="width30 floatright display-number">--><?php //echo $this->vmPagination->getResultsCounter ();?><!--<br/>--><?php //echo $this->vmPagination->getLimitBox ($this->category->limit_list_step); ?><!--</div>-->
-
-<!--		<div class="clear"></div>-->
-<!--	</div> <!-- end of orderby-displaynumber -->
-
-	<?php
-	if (!empty($this->products)) {
-		$products = array();
-		$products[0] = $this->products;
-		echo shopFunctionsF::renderVmSubLayout($this->productsLayout, array('products' => $products, 'currency' => $this->currency, 'products_per_row' => $this->perRow, 'showRating' => $this->showRating));
-
-		?>
-
-		<div class="vm-pagination"><?php echo $this->vmPagination->getPagesLinks(); ?>
-			<!--			<span style="float:right">-->
-			<?php //echo $this->vmPagination->getPagesCounter (); ?><!--</span>-->
+			<?php } ?>
 		</div>
 
-	<?php } ?>
-
-	<?php if ($manufacturer->mf_name) { ?>
-                <div class="manufacturer-block">
-                <?php if ( !empty($manufacturer->mf_desc) ) { ?>
-                	<div class="manuf-desc">
-                        	<p><?php echo $manufacturer->mf_desc; ?></p>
-                        </div>
-                <?php } ?>
+        <?php if ( !empty($manufacturer->mf_desc) ) { ?>
+            <div class="manufacturer-block">
+                <div class="manuf-desc">
+                    <p><?php echo $manufacturer->mf_desc; ?></p>
                 </div>
+            </div>
         <?php } ?>
-
-	<?php
-//	elseif (!empty($this->keyword)) {
-//		echo JText::_ ('COM_VIRTUEMART_NO_RESULT') . ($this->keyword ? ' : (' . $this->keyword . ')' : '');
-//	}
-	?>
-</div><!-- end browse-view -->
+	<?php }	?>
+<?php } ?>

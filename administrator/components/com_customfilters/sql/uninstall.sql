@@ -1,1 +1,0 @@
-DROP TABLE `#__cf_customfields`, `#__cf_filtertypes`;

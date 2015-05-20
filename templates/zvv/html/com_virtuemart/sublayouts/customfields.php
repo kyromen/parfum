@@ -27,7 +27,7 @@ if (!empty($product->customfieldsSorted[$position])) {
 		<?php
 		if($customTitle and isset($product->customfieldsSorted[$position][0])){
 			$field = $product->customfieldsSorted[$position][0]; ?>
-		<div class="product-fields-title-wrapper"><span class="product-fields-title"><?php echo vmText::_ ($field->custom_title) ?></span>
+		<div class="product-fields-title-wrapper"><span class="product-fields-title"><strong><?php echo vmText::_ ($field->custom_title) ?></strong></span>
 			<?php if ($field->custom_tip) {
 				echo JHtml::tooltip (vmText::_($field->custom_tip), vmText::_ ($field->custom_title), 'tooltip.png');
 			} ?>
@@ -39,7 +39,7 @@ if (!empty($product->customfieldsSorted[$position])) {
 			continue;
 			?><div class="product-field product-field-type-<?php echo $field->field_type ?>">
 				<?php if (!$customTitle and $field->custom_title != $custom_title and $field->show_title) { ?>
-					<span class="product-fields-title-wrapper"><span class="product-fields-title"><?php echo vmText::_ ($field->custom_title) ?></span>
+<!--					<span class="product-fields-title-wrapper"><span class="product-fields-title"><strong>--><?php //echo vmText::_ ($field->custom_title) ?><!--</strong></span>-->
 						<?php if ($field->custom_tip) {
 							echo JHtml::tooltip ($field->custom_tip, vmText::_ ($field->custom_title), 'tooltip.png');
 						} ?></span>

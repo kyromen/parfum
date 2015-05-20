@@ -5,14 +5,12 @@
 /bin/*
 /cli/*
 /cache/*
-/dump/*
-/installation/*
-/log/*
-/logs/*
-/backup/*
 /installation/*
 /log/*
 /logs/*
 *.zip
 *.log
+*.log.php
 /configuration.php
+/images/stories/virtuemart/category/resized/*
+/images/stories/virtuemart/product/resized/*

@@ -1,0 +1,7 @@
+.icon-48-easybookreloaded {
+    background-image: url(../images/easybook_icon.png);
+}
+
+input.invalid, textarea.invalid {
+    border: 1px solid #9d261d;
+}

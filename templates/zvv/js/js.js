@@ -80,9 +80,10 @@ jQuery.noConflict();
         });
 
         // pagination.hide();
-        pagination.parent().before('<a id="itemsUpload" href="#load-more">Показать ещё</a><div class="horizontal-separator"></div>');
+        pagination.parent().before('<a id="itemsUpload" data-loading-text="Подождите..." href="#load-more">Показать ещё</a><div class="horizontal-separator"></div>');
         var pageNum = 0;
         $('#itemsUpload').click(function() {
+            $( this ).button('loading');
             pageNum += 1;
             if($('#current-page').next().find('a').attr('href') != undefined) {
                 var request = $.ajax({
@@ -93,6 +94,8 @@ jQuery.noConflict();
                         console.log(msg);
                     })
                     .done(function( data ) {
+                        $('#itemsUpload').button('reset');
+
                         if($('#current-page').next().attr('class') == null) {
                             $('#current-page').removeAttr('id').next().attr('id', 'current-page');
                             if($('#current-page').next().attr('class') != null) $('#itemsUpload').hide();

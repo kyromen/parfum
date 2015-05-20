@@ -169,9 +169,12 @@ $doc->addStyleSheet(JUri::base() . 'templates/' . $this->template . '/css/style.
 </footer><!-- #footer -->
 <jdoc:include type="modules" name="debug" />
 
+
+<link href="/templates/zvv/css/jquery.mCustomScrollbar.css" rel="stylesheet">
 <!--<link  href="/templates/zvv/css/fancybox/jquery.fancybox.css" rel="stylesheet">-->
 <!--<script src="/templates/zvv/js/fancybox/jquery.fancybox.js"></script>-->
 <script src="<?php echo $this->baseurl ?>/templates/<?php echo $this->template; ?>/js/jquery.colorbox-min.js" type="text/javascript"></script>
+<script src="<?php echo $this->baseurl ?>/templates/<?php echo $this->template; ?>/js/jquery.mCustomScrollbar.concat.min.js" type="text/javascript"></script>
 <script type="text/javascript" src="<?php echo $this->baseurl ?>/templates/<?php echo $this->template; ?>/js/js.js"></script>
 
 </body>

@@ -25,7 +25,7 @@ if (empty($this->product)) {
 	return;
 }
 
-$custom_model = VmModel::getModel('custom');
+$db = JFactory::getDBO();
 
 // get child products
 $product_model = VmModel::getModel('product');
@@ -40,6 +40,18 @@ else {
 }
 $child_products = $product_model->getProducts($ids);
 //
+
+function getCustomField($db, $pr_id, $custom_id) {
+	$sql= "SELECT value FROM #__virtuemart_product_custom_plg_param_values WHERE id = (SELECT val FROM #__virtuemart_product_custom_plg_param_ref AS t1 WHERE t1.virtuemart_product_id = " . $pr_id . " and t1.virtuemart_custom_id = " . $custom_id . " LIMIT 1);";
+	$db->setQuery($sql);
+	$db->query();
+	$out = $db->loadAssocList();
+	if ( !empty($out[0]['value']) ) {
+		return $out[0]['value'];
+	} else {
+		return "";
+	}
+}
 
 echo shopFunctionsF::renderVmSubLayout('askrecomjs',array('product'=>$this->product));
 
@@ -231,8 +243,8 @@ if ($count_images > 1) {
 			<?php foreach ($child_products as $product) { ?>
 
 				<?php
-				$p_volume = $custom_model->getCustomValue($product->virtuemart_product_id, 23);
-				$p_type = $custom_model->getCustomValue($product->virtuemart_product_id, 2);
+				$p_volume = getCustomField($db, $product->virtuemart_product_id, 23);
+				$p_type = getCustomField($db, $this->product->virtuemart_product_id, 2);
 
 				$link = JHtml::link ($product->link, $product->product_name . "<br />" . $p_type . " " . $p_volume);
 				?>

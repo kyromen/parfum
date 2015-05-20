@@ -30,14 +30,24 @@ function getVmMediaFile($virtuemart_media_id, $getthumb = false) {
 	return $db->loadResult();
 }
 
-$custom_model = VmModel::getModel('custom');
+function getCustomField($db, $pr_id, $custom_id) {
+	$sql= "SELECT value FROM #__virtuemart_product_custom_plg_param_values WHERE id = (SELECT val FROM #__virtuemart_product_custom_plg_param_ref AS t1 WHERE t1.virtuemart_product_id = " . $pr_id . " and t1.virtuemart_custom_id = " . $custom_id . " LIMIT 1);";
+	$db->setQuery($sql);
+	$db->query();
+	$out = $db->loadAssocList();
+	if ( !empty($out[0]['value']) ) {
+		return $out[0]['value'];
+	} else {
+		return "";
+	}
+}
 
 if($this->products){
 	foreach($this->products as $product){
 		if($product->quantity>0){ ?>
 			<?php
 			// prdduct volume
-			$p_volume = $custom_model->getCustomValue($product->virtuemart_product_id, 23);
+			$p_volume = getCustomField($db, $product->virtuemart_product_id, 23);
 
 			if ( (int)$product->allPrices[0]['product_override_price'] ) {
 				$p_price = (int)$product->allPrices[0]['product_override_price'];

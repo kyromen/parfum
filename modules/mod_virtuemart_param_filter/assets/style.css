@@ -15,7 +15,7 @@
 .paramfilter .disable,
 .paramfilter input[disabled="disabled"], .paramfilter input[disabled="disabled"] + span { color:#666666; opacity: 0.7 }
 .paramfilter .values span.count { color:#666; font-size:90%; float: right; display: block; }
-.paramfilter .values label *{ /* vertical-align:middle; */ }
+.paramfilter .values label *{ vertical-align:middle; }
 div.custom_params, div.filter_manufacturers, .price, .filter_category {
 	padding: 15px 0;
 	border-top: 1px solid #cccccc;

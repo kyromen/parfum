@@ -54,7 +54,7 @@ RewriteRule .* index.php [F]
 ##
 
 # RewriteBase /
-php_value memory_limit 64M
+
 ## Begin - Joomla! core SEF Section.
 #
 RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]

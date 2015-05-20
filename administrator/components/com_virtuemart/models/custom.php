@@ -1,20 +1,20 @@
 <?php
 /**
-*
-* Description
-*
-* @package	VirtueMart
-* @subpackage
-* @author Max Milbers
-* @link http://www.virtuemart.net
-* @copyright Copyright (c) 2004 - 2010 VirtueMart Team. All rights reserved by the author.
-* @license http://www.gnu.org/copyleft/gpl.html GNU/GPL, see LICENSE.php
-* VirtueMart is free software. This version may have been modified pursuant
-* to the GNU General Public License, and as distributed it includes or
-* is derivative of works licensed under the GNU General Public License or
-* other free or open source software licenses.
-* @version $Id: custom.php 3057 2011-04-19 12:59:22Z Electrocity $
-*/
+ *
+ * Description
+ *
+ * @package	VirtueMart
+ * @subpackage
+ * @author Max Milbers
+ * @link http://www.virtuemart.net
+ * @copyright Copyright (c) 2004 - 2010 VirtueMart Team. All rights reserved by the author.
+ * @license http://www.gnu.org/copyleft/gpl.html GNU/GPL, see LICENSE.php
+ * VirtueMart is free software. This version may have been modified pursuant
+ * to the GNU General Public License, and as distributed it includes or
+ * is derivative of works licensed under the GNU General Public License or
+ * other free or open source software licenses.
+ * @version $Id: custom.php 3057 2011-04-19 12:59:22Z Electrocity $
+ */
 
 // Check to ensure this file is included in Joomla!
 defined('_JEXEC') or die('Restricted access');
@@ -65,30 +65,30 @@ class VirtueMartModelCustom extends VmModel {
 		//
 	}
 
-    /**
-     * Gets a single custom by virtuemart_custom_id
-     * .
-     * @param string $type
-     * @param string $mime mime type of custom, use for exampel image
-     * @return customobject
-     */
-    function getCustom($id = 0){
+	/**
+	 * Gets a single custom by virtuemart_custom_id
+	 * .
+	 * @param string $type
+	 * @param string $mime mime type of custom, use for exampel image
+	 * @return customobject
+	 */
+	function getCustom($id = 0){
 
 		if(!empty($id)) $this->_id = (int)$id;
 
-    	if(empty($this->_cache[$this->_id])){
+		if(empty($this->_cache[$this->_id])){
 
-    		$this->_cache[$this->_id] = $this->getTable('customs');
+			$this->_cache[$this->_id] = $this->getTable('customs');
 			$this->_cache[$this->_id]->load($this->_id);
 
-		    $this->_cache[$this->_id]->_varsToPushParam = self::getVarsToPush($this->_cache[$this->_id]->field_type);
+			$this->_cache[$this->_id]->_varsToPushParam = self::getVarsToPush($this->_cache[$this->_id]->field_type);
 
 			$this->_cache[$this->_id]->customfield_params = '';
-		    if ($this->_cache[$this->_id]->field_type == 'E') {
-			    JPluginHelper::importPlugin ('vmcustom');
-			    $dispatcher = JDispatcher::getInstance ();
-			    $retValue = $dispatcher->trigger ('plgVmDeclarePluginParamsCustomVM3', array(&$this->_cache[$this->_id]));
-		    }
+			if ($this->_cache[$this->_id]->field_type == 'E') {
+				JPluginHelper::importPlugin ('vmcustom');
+				$dispatcher = JDispatcher::getInstance ();
+				$retValue = $dispatcher->trigger ('plgVmDeclarePluginParamsCustomVM3', array(&$this->_cache[$this->_id]));
+			}
 			//exaample 	vm2 withParent="0"|parentOrderable="0"|
 			//			vm3 withParent="1"|parentOrderable="1"|
 			$this->_cache[$this->_id]->_xParams = 'custom_params';
@@ -97,23 +97,23 @@ class VirtueMartModelCustom extends VmModel {
 			}
 
 
-    	}
+		}
 
-  		return $this->_cache[$this->_id];
+		return $this->_cache[$this->_id];
 
-    }
+	}
 
 
-    /**
+	/**
 	 * Retrieve a list of customs from the database. This is meant only for backend use
 	 *
 	 * @author Kohl Patrick
 	 * @author Max Milbers
 	 * @return object List of custom objects
 	 */
-    function getCustoms($custom_parent_id,$search = false){
+	function getCustoms($custom_parent_id,$search = false){
 
-	    $query='* FROM `#__virtuemart_customs` ';
+		$query='* FROM `#__virtuemart_customs` ';
 
 		$where = array();
 		if($custom_parent_id){
@@ -132,14 +132,14 @@ class VirtueMartModelCustom extends VmModel {
 		else {
 			$whereString = '';
 		}
-	    $datas = new stdClass();
+		$datas = new stdClass();
 		$datas->items = $this->exeSortSearchListQuery(0, $query, '',$whereString,$this->_getOrdering());
 
 		if (!class_exists('VmHTML')) require(VMPATH_ADMIN.DS.'helpers'.DS.'html.php');
 		$field_types = self::getCustomTypes() ;
 
 		foreach ($datas->items as $key => & $data) {
-	  		if (!empty($data->custom_parent_id)) $data->custom_parent_title = $this->getCustomParentTitle($data->custom_parent_id);
+			if (!empty($data->custom_parent_id)) $data->custom_parent_title = $this->getCustomParentTitle($data->custom_parent_id);
 			else {
 				$data->custom_parent_title =  '-' ;
 			}
@@ -154,7 +154,7 @@ class VirtueMartModelCustom extends VmModel {
 		$datas->customsSelect= $this->displayCustomSelection();
 
 		return $datas;
-    }
+	}
 
 	public function getCustomParentTitle ($custom_parent_id) {
 
@@ -424,14 +424,11 @@ class VirtueMartModelCustom extends VmModel {
 	}
 
 	function getCustomValue($pr_id, $custom_id) {
-		$sql= "SELECT customsforall_value_name as value
-				FROM #__virtuemart_custom_plg_customsforall_values
-				WHERE customsforall_value_id = (SELECT customsforall_value_id
-												FROM #__virtuemart_product_custom_plg_customsforall AS t1
-												WHERE t1.customfield_id = (SELECT virtuemart_customfield_id
-																			FROM #__virtuemart_product_customfields as t2
-																			WHERE t2.virtuemart_product_id = " . $pr_id .
-																				 " and t2.virtuemart_custom_id = " . $custom_id . " LIMIT 1) LIMIT 1);";
+		$sql= "SELECT value
+				FROM #__virtuemart_product_custom_plg_param_values
+				WHERE id = (SELECT val
+							FROM #__virtuemart_product_custom_plg_param_ref AS t1
+							WHERE t1.virtuemart_product_id = " . $pr_id . " and t1.virtuemart_custom_id = " . $custom_id . " LIMIT 1);";
 		$db = JFactory::getDBO();
 		$db->setQuery($sql);
 		$db->query();
@@ -442,5 +439,26 @@ class VirtueMartModelCustom extends VmModel {
 			return "";
 		}
 	}
+
+	//	new filter
+//	function getCustomValue($pr_id, $custom_id) {
+//		$sql= "SELECT customsforall_value_name as value
+//				FROM #__virtuemart_custom_plg_customsforall_values
+//				WHERE customsforall_value_id = (SELECT customsforall_value_id
+//												FROM #__virtuemart_product_custom_plg_customsforall AS t1
+//												WHERE t1.customfield_id = (SELECT virtuemart_customfield_id
+//																			FROM #__virtuemart_product_customfields as t2
+//																			WHERE t2.virtuemart_product_id = " . $pr_id .
+//																				 " and t2.virtuemart_custom_id = " . $custom_id . " LIMIT 1) LIMIT 1);";
+//		$db = JFactory::getDBO();
+//		$db->setQuery($sql);
+//		$db->query();
+//		$out = $db->loadAssocList();
+//		if ( !empty($out[0]['value']) ) {
+//			return $out[0]['value'];
+//		} else {
+//			return "";
+//		}
+//	}
 }
 // pure php no closing tag

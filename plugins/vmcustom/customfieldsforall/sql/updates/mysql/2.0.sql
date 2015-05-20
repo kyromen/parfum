@@ -1,1 +1,0 @@
-ALTER TABLE `#__virtuemart_product_custom_plg_customsforall` DROP `custom_price`
