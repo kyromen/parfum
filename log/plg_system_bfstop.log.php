@@ -134,3 +134,18 @@
 2015-03-04T12:50:07+00:00 DEBUG Successful login by alex from IP address 127.0.0.1
 2015-03-04T19:05:05+00:00 DEBUG Successful login by alex from IP address 127.0.0.1
 2015-03-04T20:46:02+00:00 DEBUG Successful login by alex from IP address 127.0.0.1
+2015-05-06T19:25:10+00:00 DEBUG Successful login by alex from IP address 91.79.216.28
+2015-05-09T19:46:17+00:00 DEBUG Failed login attempt from IP address 37.186.127.130
+2015-05-09T19:46:17+00:00 DEBUG Failed logins: 1; allowed: 3
+2015-05-09T19:46:17+00:00 INFO Sent email to alex.igrychev@gmail.com, subject: 1001parfum: Неудачные попытки http://old.1001parfum.ru/; successful
+2015-05-11T14:18:30+00:00 DEBUG Failed login attempt from IP address 37.186.127.130
+2015-05-11T14:18:30+00:00 DEBUG Failed logins: 1; allowed: 3
+2015-05-11T14:18:30+00:00 INFO Sent email to alex.igrychev@gmail.com, subject: 1001parfum: Неудачные попытки http://old.1001parfum.ru/; successful
+2015-05-11T14:19:14+00:00 DEBUG Successful login by marat from IP address 37.186.127.130
+2015-05-12T19:54:53+00:00 DEBUG Failed login attempt from IP address 37.186.127.130
+2015-05-12T19:54:53+00:00 DEBUG Failed logins: 1; allowed: 3
+2015-05-12T19:54:53+00:00 INFO Sent email to alex.igrychev@gmail.com, subject: 1001parfum: Неудачные попытки http://old.1001parfum.ru/; successful
+2015-05-12T19:55:37+00:00 DEBUG Failed login attempt from IP address 37.186.127.130
+2015-05-12T19:55:37+00:00 DEBUG Failed logins: 2; allowed: 3
+2015-05-12T20:05:29+00:00 DEBUG Successful login by marat from IP address 37.186.127.130
+2015-05-15T09:28:30+00:00 DEBUG Successful login by alex from IP address 91.79.216.28

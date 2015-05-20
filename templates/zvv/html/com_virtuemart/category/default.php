@@ -65,24 +65,18 @@ if ( strstr ( JURI::current(), "/manufacturer/" ) ) {
 	?>
 	<?php if ($manufacturer->mf_name) { ?>
 		<div class="manufacturer-block">
-			<div class="manuf-header">Парфюмерия <?php echo $manufacturer->mf_name;?></div>
+			<h1 class="manuf-header">Духи <?php echo $manufacturer->mf_name;?></h1>
 			<?php if (isset($manufacturer->virtuemart_media_id[0])) {
 				foreach ($manufacturer->virtuemart_media_id as $virtuemart_media_id) { ?>
 					<div class="manuf-img"><img src="<?php echo getVmMediaFile($virtuemart_media_id);?>" \></div>
 				<?php } ?>
-			<?php } ?>
-
-			<?php if ( !empty($manufacturer->mf_desc) ) { ?>
-				<div class="manuf-desc">
-					<p><?php echo $manufacturer->mf_desc; ?></p>
-				</div>
 			<?php } ?>
 		</div>
 	<?php } else { ?>
 		<div style="padding: 10px;"></div>
 	<?php } ?>
 	<?php
-	$manufacturers = $manuM ->getManufacturersOfProductsInCategory($this->category->virtuemart_category_id,VmConfig::$vmlang,$mlang);
+	$manufacturers = $manuM->getManufacturersOfProductsInCategory($this->category->virtuemart_category_id,VmConfig::$vmlang,$mlang);
 	$indexes = array();
 	$brands = array();
 	$block = $manufacturers[0]->mf_name[0];
@@ -214,54 +208,16 @@ if ( strstr ( JURI::current(), "/manufacturer/" ) ) {
 		<div class="clear"></div>
 	</div>
 	<?php } ?>
+<?php } else { ?>
+	<h1><?php echo $this->category->category_name;?> парфюмерия</h1>
 <?php } ?>
 
 <div id="products-block" class="browse-view">
 	<?php
-
 	if (!empty($this->keyword)) {
 		?>
 		<h3><?php echo $this->keyword; ?></h3>
-	<?php
-	} ?>
-<!--	--><?php //if (!empty($this->keyword)) {
-//
-//		$category_id  = JRequest::getInt ('virtuemart_category_id', 0); ?>
-<!--		<form action="--><?php //echo JRoute::_ ('index.php?option=com_virtuemart&view=category&limitstart=0', FALSE); ?><!--" method="get">-->
-<!---->
-<!--			<!--BEGIN Search Box -->
-<!--			<div class="virtuemart_search">-->
-<!--				--><?php //echo $this->searchcustom ?>
-<!--				<br/>-->
-<!--				--><?php //if (isset($this->searchcustomvalues)) { echo $this->searchcustomvalues; } ?>
-<!--				<input name="keyword" class="inputbox" type="text" size="20" value="--><?php //echo $this->keyword ?><!--"/>-->
-<!--				<input type="submit" value="--><?php //echo JText::_ ('COM_VIRTUEMART_SEARCH') ?><!--" class="button" onclick="this.form.keyword.focus();"/>-->
-<!--			</div>-->
-<!--			<input type="hidden" name="search" value="true"/>-->
-<!--			<input type="hidden" name="view" value="category"/>-->
-<!--			<input type="hidden" name="option" value="com_virtuemart"/>-->
-<!--			<input type="hidden" name="virtuemart_category_id" value="--><?php //echo $category_id; ?><!--"/>-->
-<!---->
-<!--		</form>-->
-<!--		<!-- End Search Box -->
-<!--	--><?php //} ?>
-
-<!--	<div class="orderby-displaynumber">-->
-<!--		<div class="floatleft">-->
-<!--			--><?php //echo $this->orderByList['orderby']; ?>
-<!--			--><?php //echo $this->orderByList['manufacturer']; ?>
-<!--		</div>-->
-		<!--    <div class="vm-pagination floatright">-->
-		<!--        --><?php
-		//            echo $this->vmPagination->getPagesLinks ();
-		//        ?>
-		<!--        <!--            <span style="float:right">--><?php ////echo $this->vmPagination->getPagesCounter (); ?><!--<!--</span>-->
-		<!--    </div>-->
-
-		<!--    <div class="width30 floatright display-number">--><?php //echo $this->vmPagination->getResultsCounter ();?><!--<br/>--><?php //echo $this->vmPagination->getLimitBox ($this->category->limit_list_step); ?><!--</div>-->
-
-<!--		<div class="clear"></div>-->
-<!--	</div> <!-- end of orderby-displaynumber -->
+	<?php } ?>
 
 	<?php
 	if (!empty($this->products)) {
@@ -277,9 +233,17 @@ if ( strstr ( JURI::current(), "/manufacturer/" ) ) {
 		</div>
 
 	<?php } ?>
+
+	<?php if ($manufacturer->mf_name) { ?>
+                <div class="manufacturer-block">
+                <?php if ( !empty($manufacturer->mf_desc) ) { ?>
+                	<div class="manuf-desc">
+                        	<p><?php echo $manufacturer->mf_desc; ?></p>
+                        </div>
+                <?php } ?>
+                </div>
+        <?php } ?>
+
 	<?php
-//	elseif (!empty($this->keyword)) {
-//		echo JText::_ ('COM_VIRTUEMART_NO_RESULT') . ($this->keyword ? ' : (' . $this->keyword . ')' : '');
-//	}
 	?>
 </div><!-- end browse-view -->

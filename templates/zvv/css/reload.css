@@ -76,6 +76,7 @@ td { vertical-align: top; }
 .clr { clear:both; }
 .clearfix { *zoom: 1; }
 
+h1, h2, h3, h4 { font-family: PFDinTextCondProRegular; font-weight: normal; text-transform: uppercase; }
 a, span, p, h1, h2, h3, h4 { line-height: 1; }
 input, button {
   -webkit-appearance: none;

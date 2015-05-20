@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+	<layout title="COM_EASYBOOKRELOADED_GUESTBOOK_STANDARD_LAYOUT">
+		<message>
+			<![CDATA[COM_EASYBOOKRELOADED_GUESTBOOK_STANDARD_LAYOUT_DESC]]>
+		</message>
+	</layout>
+	<fields name="request">
+        <fieldset name="request" addfieldpath="/administrator/components/com_easybookreloaded/models/fields">
+            <field name="gbid" type="ebrgb" section="com_easybookreloaded" default="0" label="COM_EASYBOOKRELOADED_FIELD_SELECT_GUESTBOOK" description="COM_EASYBOOKRELOADED_FIELD_SELECT_GUESTBOOKDESC" required="required" />
+        </fieldset>
+    </fields>
+</metadata>
