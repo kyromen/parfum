@@ -10,4 +10,7 @@
 /logs/*
 *.zip
 *.log
+*.log.php
 /configuration.php
+/images/stories/virtuemart/category/resized/*
+/images/stories/virtuemart/product/resized/*
